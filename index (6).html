@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bunty Patil – Lokadalat Complaint Portal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --pri:#1a3a5c;--acc:#e67e22;--grn:#27ae60;--red:#e74c3c;
+      --bg:#f0f4f8;--card:#fff;--bd:#dde3ec;--txt:#1a2332;--muted:#64748b;--rad:10px
+    }
+    body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--txt);padding-bottom:50px}
+
+    /* ── HEADER ── */
+    .header{background:linear-gradient(135deg,#1a3a5c 0%,#1a5276 100%);border-bottom:4px solid var(--acc)}
+    .header-inner{display:flex;align-items:center;gap:18px;padding:18px 24px;max-width:700px;margin:0 auto}
+    .mla-img{width:82px;height:82px;border-radius:50%;border:3px solid var(--acc);object-fit:cover;flex-shrink:0}
+    .header-text{color:#fff}
+    .header-text h1{font-size:20px;font-weight:700;line-height:1.2}
+    .header-text p{font-size:13px;color:rgba(255,255,255,.75);margin-top:3px}
+    .tagline{font-size:11px;background:rgba(255,255,255,.15);padding:3px 10px;border-radius:20px;display:inline-block;margin-top:6px}
+
+    /* ── STATS ── */
+    .stats-bar{background:#fff;border-bottom:1px solid var(--bd);overflow-x:auto}
+    .stats-inner{display:flex;max-width:700px;margin:0 auto}
+    .stat{flex:1;text-align:center;padding:10px 8px;border-right:1px solid var(--bd);min-width:90px}
+    .stat:last-child{border:none}
+    .stat .num{font-size:20px;font-weight:700;color:var(--pri)}
+    .stat .lbl{font-size:11px;color:var(--muted)}
+
+    /* ── TABS ── */
+    .tabs{display:flex;background:#fff;border-bottom:2px solid var(--bd);overflow-x:auto}
+    .tabs-inner{display:flex;max-width:700px;margin:0 auto;width:100%}
+    .tab{flex:1;padding:12px 8px;text-align:center;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;transition:.2s;white-space:nowrap}
+    .tab.active{color:var(--pri);border-bottom-color:var(--pri);background:#f8fafc}
+
+    /* ── PAGES ── */
+    .page{display:none;max-width:700px;margin:0 auto;padding:16px}
+    .page.active{display:block}
+
+    /* ── CARD ── */
+    .card{background:var(--card);border-radius:var(--rad);border:1px solid var(--bd);padding:20px;margin-bottom:16px}
+    .section-title{font-size:13px;font-weight:700;color:var(--pri);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+
+    /* ── FORM ── */
+    .form-group{margin-bottom:16px}
+    .form-group label{display:block;font-size:12px;font-weight:700;color:var(--pri);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px}
+    .form-group input,.form-group select,.form-group textarea{
+      width:100%;padding:11px 14px;border:1.5px solid var(--bd);border-radius:8px;
+      font-size:15px;color:var(--txt);background:#fff;outline:none;transition:.2s;font-family:inherit
+    }
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+      border-color:var(--pri);box-shadow:0 0 0 3px rgba(26,58,92,.08)
+    }
+    .form-group textarea{resize:vertical;min-height:80px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:480px){.form-row{grid-template-columns:1fr}}
+
+    /* ── PRIORITY ── */
+    .priority-select{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px}
+    .priority-btn{padding:8px;border:2px solid var(--bd);border-radius:8px;text-align:center;cursor:pointer;font-size:12px;font-weight:600;transition:.15s;user-select:none}
+    .priority-btn.low{color:#27ae60}.priority-btn.low.sel{background:#eafaf1;border-color:#27ae60}
+    .priority-btn.med{color:#e67e22}.priority-btn.med.sel{background:#fef9ef;border-color:#e67e22}
+    .priority-btn.hgh{color:#e74c3c}.priority-btn.hgh.sel{background:#fdedec;border-color:#e74c3c}
+
+    /* ── BUTTONS ── */
+    .btn-submit{width:100%;padding:14px;background:var(--pri);color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:.15s}
+    .btn-submit:hover{background:#162f4a}
+    .btn-submit:disabled{background:#94a3b8;cursor:not-allowed}
+    .btn-wa{width:100%;padding:13px;background:#25D366;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;transition:.15s}
+    .btn-wa:hover{background:#1ebe5d}
+
+    /* ── SUCCESS ── */
+    .success-toast{background:#eafaf1;border:1px solid #27ae60;border-radius:8px;padding:14px 16px;display:none;gap:10px;align-items:flex-start;margin-bottom:14px}
+    .success-toast.show{display:flex;animation:fadeIn .3s ease}
+    .success-toast strong{display:block;font-size:14px;color:#1e8449;margin-bottom:3px}
+    .success-toast p{font-size:12px;color:#2e7d32;line-height:1.5}
+
+    /* ── COMPLAINTS LIST ── */
+    .complaint-card{background:#fff;border:1px solid var(--bd);border-radius:var(--rad);padding:14px 16px;margin-bottom:10px;border-left:4px solid var(--bd)}
+    .complaint-card.open{border-left-color:var(--red)}
+    .complaint-card.progress{border-left-color:var(--acc)}
+    .complaint-card.resolved{border-left-color:var(--grn)}
+    .cc-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+    .cc-name{font-weight:700;font-size:14px}
+    .cc-id{font-size:11px;color:var(--muted)}
+    .cc-badge{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+    .cc-badge.open{background:#fdedec;color:#c0392b}
+    .cc-badge.progress{background:#fef9ef;color:#d35400}
+    .cc-badge.resolved{background:#eafaf1;color:#1e8449}
+    .cc-cat{font-size:12px;color:var(--muted);margin-bottom:4px}
+    .cc-desc{font-size:13px;line-height:1.5}
+    .cc-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;font-size:11px;color:var(--muted)}
+    .update-box{margin-top:10px;background:#fef9ef;border-radius:6px;padding:10px;font-size:12px;color:#7d6608;line-height:1.5}
+
+    /* ── FILTER ── */
+    .filter-row{display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px}
+    .filter-btn{padding:6px 14px;border:1.5px solid var(--bd);border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;background:#fff;color:var(--muted);white-space:nowrap;transition:.15s}
+    .filter-btn.active{background:var(--pri);color:#fff;border-color:var(--pri)}
+
+    /* ── TRACK ── */
+    .track-box{background:#f8fafc;border:1.5px dashed var(--bd);border-radius:8px;padding:20px;text-align:center;margin-bottom:14px}
+    .track-box p{font-size:13px;color:var(--muted);margin-bottom:10px}
+    .track-row{display:flex;gap:8px}
+    .track-row input{flex:1;padding:10px 14px;border:1.5px solid var(--bd);border-radius:8px;font-size:14px;outline:none;font-family:inherit}
+    .track-row input:focus{border-color:var(--pri)}
+    .btn-track{padding:10px 18px;background:var(--pri);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px}
+
+    /* ── WHATSAPP / CHATBOT ── */
+    .wa-banner{background:linear-gradient(135deg,#075E54,#128C7E);border-radius:var(--rad);padding:20px;color:#fff;margin-bottom:16px}
+    .wa-banner h3{font-size:16px;margin-bottom:6px}
+    .wa-banner p{font-size:13px;opacity:.85;line-height:1.5;margin-bottom:14px}
+    .btn-wa-outline{background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.5);color:#fff;padding:9px 18px;border-radius:8px;font-weight:700;cursor:pointer;font-size:13px}
+    .wa-number-box{background:#fff;border-radius:8px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+    .wa-number-box .num{font-size:20px;font-weight:700;color:#075E54;letter-spacing:1px}
+    .wa-number-box .copy-btn{background:#075E54;color:#fff;border:none;border-radius:6px;padding:7px 14px;font-weight:700;cursor:pointer;font-size:13px}
+
+    .chat-preview{background:#E5DDD5;border-radius:var(--rad);overflow:hidden;margin-bottom:16px}
+    .chat-hdr{background:#075E54;color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px}
+    .chat-avatar{width:36px;height:36px;border-radius:50%;background:#128C7E;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0}
+    .chat-info h4{font-size:14px;font-weight:700}
+    .chat-info p{font-size:11px;opacity:.75}
+    .chat-msgs{padding:14px;display:flex;flex-direction:column;gap:10px;min-height:250px;max-height:320px;overflow-y:auto}
+    .msg{max-width:84%;padding:9px 12px;border-radius:10px;font-size:13px;line-height:1.5}
+    .msg.bot{background:#fff;align-self:flex-start;border-radius:2px 10px 10px 10px}
+    .msg.user{background:#DCF8C6;align-self:flex-end;border-radius:10px 2px 10px 10px}
+    .msg .time{font-size:10px;color:#8b9da7;text-align:right;margin-top:4px}
+    .qr-wrap{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+    .qr{background:#fff;border:1.5px solid #25D366;color:#075E54;padding:5px 10px;border-radius:16px;font-size:12px;font-weight:600;cursor:pointer;transition:.15s}
+    .qr:hover{background:#e8fff2}
+    .chat-input-bar{background:#f0f0f0;padding:10px 12px;display:flex;gap:8px;align-items:center;border-top:1px solid #ccc}
+    .chat-input-bar input{flex:1;background:#fff;border:none;border-radius:20px;padding:8px 14px;font-size:13px;outline:none;font-family:inherit}
+    .btn-send{width:36px;height:36px;background:#25D366;border:none;border-radius:50%;cursor:pointer;color:#fff;font-size:15px;display:flex;align-items:center;justify-content:center}
+
+    /* ── STEPS ── */
+    .steps{display:flex;flex-direction:column;gap:12px}
+    .step{display:flex;gap:12px;align-items:flex-start}
+    .step-num{width:28px;height:28px;border-radius:50%;background:var(--pri);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:1px}
+    .step-body h4{font-size:13px;font-weight:700;margin-bottom:3px}
+    .step-body p{font-size:12px;color:var(--muted);line-height:1.5}
+    .step-body a{color:var(--pri);font-weight:600}
+    .info-box{background:#f0f9ff;border:1.5px solid #bde0fe;border-radius:8px;padding:14px;margin-top:12px}
+    .info-box h4{font-size:13px;font-weight:700;color:#0369a1;margin-bottom:8px}
+    .info-box p{font-size:12px;color:#0c4a6e;line-height:1.8}
+
+    /* ── UTILS ── */
+    .hidden{display:none}
+    .animate-in{animation:fadeIn .3s ease}
+    .demo-badge{display:inline-block;background:#f59e0b;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.5px;margin-left:8px;vertical-align:middle}
+    .demo-banner{background:#fffbeb;border:1.5px solid #f59e0b;border-radius:8px;padding:12px 16px;display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;font-size:13px;color:#92400e;line-height:1.5}
+    .demo-toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1a3a5c;color:#fff;padding:12px 20px;border-radius:8px;font-size:13px;font-weight:600;z-index:999;display:none;max-width:90%;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+    .demo-toast.show{display:block;animation:fadeIn .3s ease}
+    .wa-demo-note{background:#e8fff2;border:1.5px solid #25D366;border-radius:8px;padding:12px 14px;font-size:12px;color:#065f46;margin-bottom:12px;line-height:1.6}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    .spinner{animation:spin 1s linear infinite;display:inline-block}
+    @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <img src="bunty patil.png" class="mla-img" alt="Bunty Patil MLA"
+         onerror="this.style.background='#2c5f8a';this.outerHTML='<div class=\'mla-img\' style=\'background:#2c5f8a;display:flex;align-items:center;justify-content:center;color:#fff;font-size:28px;font-weight:700;flex-shrink:0\'>BP</div>'">
+    <div class="header-text">
+      <h1>Bunty Patil – Lokadalat Portal</h1>
+      <p>आमदार कार्यालय · Solapur Constituency</p>
+      <span class="tagline">⚡ Complaints addressed within 7 working days</span>
+    </div>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner" id="statsBar">
+    <div class="stat"><div class="num" id="statTotal">–</div><div class="lbl">Total</div></div>
+    <div class="stat"><div class="num" style="color:var(--red)" id="statOpen">–</div><div class="lbl">Open</div></div>
+    <div class="stat"><div class="num" style="color:var(--acc)" id="statProgress">–</div><div class="lbl">In Progress</div></div>
+    <div class="stat"><div class="num" style="color:var(--grn)" id="statResolved">–</div><div class="lbl">Resolved</div></div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tabs-inner">
+    <div class="tab active" onclick="switchTab('file')">📝 File Complaint</div>
+    <div class="tab" onclick="switchTab('track')">🔍 Track Status</div>
+    <div class="tab" onclick="switchTab('whatsapp')">💬 WhatsApp Bot</div>
+  </div>
+</div>
+
+<!-- ═══════════════ FILE COMPLAINT ═══════════════ -->
+<div id="tab-file" class="page active">
+
+  <div id="successMsg" class="success-toast">
+    <div style="font-size:22px">✅</div>
+    <div>
+      <strong>Complaint Submitted Successfully!</strong>
+      <p id="successRef">Your complaint ID has been generated. You will receive a WhatsApp message within 24 hours with the update.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title"><i class="fas fa-user"></i> Your Details</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" id="f_name" placeholder="तुमचे पूर्ण नाव">
+      </div>
+      <div class="form-group">
+        <label>Mobile Number *</label>
+        <input type="tel" id="f_mobile" placeholder="10-digit number" maxlength="10">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Village / Area *</label>
+        <input type="text" id="f_village" placeholder="गाव / परिसर">
+      </div>
+      <div class="form-group">
+        <label>Visit Date</label>
+        <input type="date" id="f_date">
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title"><i class="fas fa-clipboard-list"></i> Complaint Details</div>
+
+    <div class="form-group">
+      <label>Department / Category *</label>
+      <select id="f_cat" onchange="updateSub()">
+        <option value="">-- Select Department --</option>
+        <option value="पाणीपुरवठा">💧 Water Supply & Sanitation</option>
+        <option value="रस्ते">🛣 Roads & Transport</option>
+        <option value="वीज">⚡ Electricity</option>
+        <option value="शेती">🌾 Agriculture</option>
+        <option value="आरोग्य">🏥 Health Services</option>
+        <option value="शिक्षण">📚 Education</option>
+        <option value="रोजगार">💼 Employment</option>
+        <option value="सामाजिक">🤝 Social Issues</option>
+        <option value="कायदा">⚖️ Law & Order</option>
+        <option value="नागरी">🏙 Civic Amenities</option>
+      </select>
+    </div>
+
+    <div class="form-group hidden animate-in" id="subGroup">
+      <label>Specific Problem *</label>
+      <select id="f_sub">
+        <option value="">-- Select Problem --</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Priority Level</label>
+      <div class="priority-select">
+        <div class="priority-btn low" onclick="setPri('low',this)">🟢 Low</div>
+        <div class="priority-btn med sel" onclick="setPri('med',this)">🟡 Medium</div>
+        <div class="priority-btn hgh" onclick="setPri('high',this)">🔴 High / Urgent</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Describe Your Complaint *</label>
+      <textarea id="f_desc" rows="4" placeholder="Clearly describe the problem, location, and how long it has been happening..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Preferred Contact Method</label>
+      <select id="f_contact">
+        <option value="whatsapp">💬 WhatsApp Message</option>
+        <option value="phone">📞 Phone Call</option>
+        <option value="visit">🏠 Home Visit by Officer</option>
+      </select>
+    </div>
+
+    <button class="btn-submit" id="submitBtn" onclick="submitComplaint()">
+      <i class="fas fa-paper-plane"></i> Submit Complaint
+    </button>
+    <button class="btn-wa" onclick="fileViaWhatsApp()">
+      <i class="fab fa-whatsapp"></i> Try WhatsApp Bot (Demo) →
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════ TRACK STATUS ═══════════════ -->
+<div id="tab-track" class="page">
+  <div class="card">
+    <div class="section-title"><i class="fas fa-search"></i> Track Your Complaint</div>
+    <div class="track-box">
+      <p>Enter your Complaint ID or registered mobile number</p>
+      <div class="track-row">
+        <input type="text" id="trackInput" placeholder="e.g. LK-2024-047 or 9876543210">
+        <button class="btn-track" onclick="trackComplaint()">Track</button>
+      </div>
+    </div>
+    <div id="trackResult" class="hidden animate-in"></div>
+  </div>
+
+  <div class="card">
+    <div class="section-title"><i class="fas fa-list"></i> All Complaints</div>
+    <div class="filter-row">
+      <div class="filter-btn active" onclick="filterList('all',this)">All</div>
+      <div class="filter-btn" onclick="filterList('open',this)">Open</div>
+      <div class="filter-btn" onclick="filterList('progress',this)">In Progress</div>
+      <div class="filter-btn" onclick="filterList('resolved',this)">Resolved</div>
+    </div>
+    <div id="complaintList">
+      <div style="text-align:center;padding:30px;color:var(--muted);font-size:14px">
+        <i class="fas fa-spinner fa-spin"></i> Loading complaints...
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ WHATSAPP BOT ═══════════════ -->
+<div id="tab-whatsapp" class="page">
+
+  <div class="demo-banner">
+    <span style="font-size:22px">🎬</span>
+    <div><strong>Demo Mode</strong> — The chatbot below is a fully working simulation. In the live version, this entire conversation happens on the citizen's real WhatsApp. No app download needed for citizens!</div>
+  </div>
+
+  <div class="wa-banner">
+    <h3>🤖 WhatsApp Complaint Bot <span class="demo-badge">DEMO</span></h3>
+    <p>In the live version, citizens message your WhatsApp number and this bot replies automatically — 24/7, in Marathi or English.</p>
+    <button class="btn-wa-outline" onclick="document.querySelector('.chat-preview').scrollIntoView({behavior:'smooth'})">▶ Try the full chatbot demo below ↓</button>
+    <div class="wa-number-box">
+      <div>
+        <div style="font-size:11px;color:#075E54;font-weight:600;margin-bottom:2px">WHATSAPP NUMBER (DEMO)</div>
+        <div class="num" id="waDisplayNum">+91 XXXXX XXXXX</div>
+      </div>
+      <button class="copy-btn" onclick="showDemoBanner('📱 In live mode this opens WhatsApp on the citizen phone instantly!')">📲 How it works</button>
+    </div>
+  </div>
+
+  <!-- LIVE CHATBOT DEMO -->
+  <div class="wa-demo-note">
+    💡 <b>This is a fully working demo.</b> Type anything below, tap the quick-reply buttons, upload a photo, file a complaint end-to-end — it works exactly like the real WhatsApp bot will. Try typing <b>"नमस्कार"</b> or tap <b>"📝 File a Complaint"</b> to begin!
+  </div>
+  <div class="card">
+    <div class="section-title"><i class="fab fa-whatsapp" style="color:#25D366"></i> Live Demo – Try the Bot Yourself</div>
+    <div class="chat-preview">
+      <div class="chat-hdr">
+        <div class="chat-avatar">BP</div>
+        <div class="chat-info">
+          <h4>Bunty Patil Jan Seva</h4>
+          <p>🟢 Online · Official WhatsApp Bot</p>
+        </div>
+      </div>
+      <div class="chat-msgs" id="chatMsgs"></div>
+      <div id="imgPreviewBar" style="display:none;background:#f0f0f0;padding:6px 12px;border-top:1px solid #ccc;align-items:center;gap:8px">
+        <img id="imgThumb" style="width:48px;height:48px;border-radius:6px;object-fit:cover;border:1px solid #ccc">
+        <span style="font-size:12px;color:#555;flex:1" id="imgName">photo.jpg</span>
+        <button onclick="removeImg()" style="background:none;border:none;font-size:18px;cursor:pointer;color:#888">✕</button>
+      </div>
+      <div class="chat-input-bar">
+        <label for="chatImgInput" style="cursor:pointer;font-size:22px;color:#555;flex-shrink:0;line-height:1" title="Attach photo">📎</label>
+        <input type="file" id="chatImgInput" accept="image/*" style="display:none" onchange="handleImgSelect(this)">
+        <input type="text" id="chatInput" placeholder="Type a message or tap a reply..." onkeydown="if(event.key==='Enter')sendChat()">
+        <button class="btn-send" onclick="sendChat()">➤</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETUP GUIDE -->
+  <div class="card">
+    <div class="section-title"><i class="fas fa-rocket"></i> How to Set Up the WhatsApp Bot</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Get a WhatsApp Business API number</h4>
+          <p>Go to <a href="https://business.whatsapp.com" target="_blank">business.whatsapp.com</a> or sign up with a provider like <strong>Gupshup</strong> or <strong>WATI</strong>. You'll need a dedicated SIM that is NOT already linked to personal WhatsApp.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Sign up for a chatbot platform</h4>
+          <p>We recommend <a href="https://www.gupshup.io" target="_blank">Gupshup.io</a> for Marathi support. Create a free account → New Bot → WhatsApp channel → connect your number.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Import the bot flow (use the script file)</h4>
+          <p>Use the <code>whatsapp_bot_script.txt</code> file provided — it contains the complete Marathi + English conversation flow to paste into your bot builder.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>Connect to Google Sheets</h4>
+          <p>In your chatbot platform, add a Webhook action that calls your <strong>Google Apps Script URL</strong> (from <code>google_apps_script.js</code>). This saves every complaint straight to your sheet.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h4>Update the Script URL in this portal</h4>
+          <p>Open <code>index.html</code>, find <code>SCRIPT_URL</code> near the top of the &lt;script&gt; section, and replace it with your deployed Google Script URL.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <h4>Go live & share your number</h4>
+          <p>Print the QR code on office banners, share on social media, and put it on your website. Citizens just message "नमस्कार" to start filing.</p>
+        </div>
+      </div>
+    </div>
+    <div class="info-box" style="margin-top:16px">
+      <h4>💡 Recommended Providers for Maharashtra</h4>
+      <p>
+        • <strong>Gupshup</strong> – Best Marathi language support, used by Maharashtra govt schemes. Free tier available.<br>
+        • <strong>WATI</strong> – Easy drag-and-drop builder. Good for small teams. ~₹2,500/month.<br>
+        • <strong>Interakt</strong> – Built-in CRM + WhatsApp tracking. ~₹999/month.<br>
+        • <strong>Twilio</strong> – Full code control if you want custom features.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════
+//  CONFIGURATION – UPDATE THESE VALUES
+// ════════════════════════════════════════════════
+const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+// Paste your deployed Google Apps Script URL above ↑
+// Example: 'https://script.google.com/macros/s/AKfycb.../exec'
+
+const WA_NUMBER = 'DEMO'; // Demo mode — no real WhatsApp number needed
+// ════════════════════════════════════════════════
+
+const SUB_DATA = {
+  "पाणीपुरवठा":["Acute water scarcity","Irregular water supply","Contaminated/dirty water","New borewell/well needed","Water tank repair needed","Garbage disposal problem","Drainage/gutter blockage","Public toilet needed"],
+  "रस्ते":["Pothole-ridden roads","Road needs resurfacing","New bus service needed","Bus stop facility missing","Bridge needs repair","Streetlight installation","Traffic congestion"],
+  "वीज":["Frequent power outages","Burnt transformer","New electricity connection","High electricity bill","Insufficient power for farming"],
+  "शेती":["Crop insurance claim pending","Crop damage compensation","Fertilizer/seed shortage","Irrigation project needed","Farm pond approval","Electric pump subsidy"],
+  "आरोग्य":["No doctor at health centre","Medicine shortage","New clinic needed","No ambulance available","Health scheme benefits not received"],
+  "शिक्षण":["Teacher shortage","School building needs repair","New classroom needed","Student scholarship pending","Digital education tools"],
+  "रोजगार":["Youth need employment","Jobs at MIDC","Self-employment loan","Women SHG financial support","New business permit"],
+  "सामाजिक":["Housing scheme (PM Awas)","Senior citizen pension","Disability assistance","Caste/income certificate pending","Government documents stuck"],
+  "कायदा":["Rising crime in area","Police station/chowky needed","Illegal liquor sales","Land dispute resolution"],
+  "नागरी":["Street lights not working","Waterlogging during rain","Garden/park maintenance","Drainage line needed","Encroachment removal"]
+};
+
+let selectedPriority = 'med';
+let complaintCounter = 51;
+const allComplaints = [];
+
+// ─── TABS ───
+function switchTab(t) {
+  const names = ['file','track','whatsapp'];
+  document.querySelectorAll('.tab').forEach((el,i) => el.classList.toggle('active', names[i]===t));
+  document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+  if(t==='track') loadComplaints();
+  if(t==='whatsapp' && document.getElementById('chatMsgs').children.length===0) initChat();
+}
+
+// ─── FORM ───
+function updateSub() {
+  const cat = document.getElementById('f_cat').value;
+  const grp = document.getElementById('subGroup');
+  const sub = document.getElementById('f_sub');
+  if(cat && SUB_DATA[cat]) {
+    sub.innerHTML = '<option value="">-- Select Problem --</option>';
+    SUB_DATA[cat].forEach(s => { const o=document.createElement('option'); o.value=s; o.textContent=s; sub.appendChild(o); });
+    grp.classList.remove('hidden');
+  } else grp.classList.add('hidden');
+}
+
+function setPri(p, el) {
+  selectedPriority = p;
+  document.querySelectorAll('.priority-btn').forEach(b => b.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+// ─── SUBMIT ───
+function submitComplaint() {
+  const name    = document.getElementById('f_name').value.trim();
+  const mobile  = document.getElementById('f_mobile').value.trim();
+  const village = document.getElementById('f_village').value.trim();
+  const cat     = document.getElementById('f_cat').value;
+  const sub     = document.getElementById('f_sub').value;
+  const desc    = document.getElementById('f_desc').value.trim();
+  const date    = document.getElementById('f_date').value;
+  const contact = document.getElementById('f_contact').value;
+
+  if(!name || !mobile || !village || !cat || !desc) {
+    alert('Please fill all required fields marked with *');
+    return;
+  }
+  if(!/^\d{10}$/.test(mobile)) {
+    alert('Please enter a valid 10-digit mobile number');
+    return;
+  }
+
+  complaintCounter++;
+  const refId = 'LK-' + new Date().getFullYear() + '-' + String(complaintCounter).padStart(3,'0');
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner spinner"></i> Submitting...';
+
+  const formData = new FormData();
+  formData.append('action', 'submit');
+  formData.append('refId', refId);
+  formData.append('name', name);
+  formData.append('mobile', mobile);
+  formData.append('village', village);
+  formData.append('visit_date', date);
+  formData.append('category', cat);
+  formData.append('sub_category', sub);
+  formData.append('priority', selectedPriority);
+  formData.append('description', desc);
+  formData.append('contact_pref', contact);
+  formData.append('status', 'Open');
+  formData.append('timestamp', new Date().toISOString());
+
+  // If no script URL set, simulate success for demo
+  if(SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+    setTimeout(() => {
+      showSuccess(refId, name);
+      btn.disabled=false; btn.innerHTML='<i class="fas fa-paper-plane"></i> Submit Complaint';
+    }, 1000);
+    return;
+  }
+
+  fetch(SCRIPT_URL, { method:'POST', body:formData })
+    .then(() => { showSuccess(refId, name); })
+    .catch(() => {
+      // fallback — show success anyway (Google Script sometimes returns CORS error but still saves)
+      showSuccess(refId, name);
+    })
+    .finally(() => {
+      btn.disabled=false; btn.innerHTML='<i class="fas fa-paper-plane"></i> Submit Complaint';
+    });
+}
+
+function showSuccess(refId, name) {
+  document.getElementById('successRef').textContent =
+    'Complaint ID: ' + refId + ' | ' + name + ' — you will receive a WhatsApp update within 24 hours.';
+  const t = document.getElementById('successMsg');
+  t.classList.add('show');
+  t.scrollIntoView({ behavior:'smooth', block:'start' });
+  document.getElementById('f_name').value='';
+  document.getElementById('f_mobile').value='';
+  document.getElementById('f_village').value='';
+  document.getElementById('f_desc').value='';
+  document.getElementById('f_cat').value='';
+  document.getElementById('subGroup').classList.add('hidden');
+  document.getElementById('f_date').valueAsDate = new Date();
+}
+
+function fileViaWhatsApp() {
+  // Demo mode: switch to WhatsApp Bot tab to show the chatbot
+  switchTab('whatsapp');
+  document.querySelector('.chat-preview').scrollIntoView({behavior:'smooth'});
+  setTimeout(()=>{
+    addChatMsg('👋 In the real portal, this button opens WhatsApp directly on your phone!\n\nFor the demo, use the chatbot right here below 👇','bot',['📝 File a Complaint','🔍 Track Complaint']);
+  },400);
+}
+
+// ─── TRACK ───
+function trackComplaint() {
+  const val = document.getElementById('trackInput').value.trim();
+  if(!val){ alert('Please enter a complaint ID or mobile number.'); return; }
+
+  const res = document.getElementById('trackResult');
+  res.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted)"><i class="fas fa-spinner fa-spin"></i> Searching...</div>';
+  res.classList.remove('hidden');
+
+  if(SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+    setTimeout(() => {
+      res.innerHTML = buildComplaintCard({
+        refId:'LK-2024-047', name:'Ramesh Kale', category:'💧 Water Supply',
+        sub_category:'Irregular water supply', village:'Subhash Nagar',
+        priority:'high', status:'progress', timestamp:'12 Jun 2024',
+        description:'Drinking water supply has been irregular for the past 2 weeks in Subhash Nagar area. Taps run for only 10 minutes daily.',
+        update:'Water dept team visited on 15 Jun. Pipe repair scheduled for 18 Jun 2024.'
+      });
+    }, 800);
+    return;
+  }
+
+  fetch(SCRIPT_URL + '?action=track&query=' + encodeURIComponent(val))
+    .then(r => r.json())
+    .then(data => {
+      if(data && data.refId) res.innerHTML = buildComplaintCard(data);
+      else res.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted)">No complaint found for "<strong>'+val+'</strong>"</div>';
+    })
+    .catch(() => {
+      res.innerHTML = '<div style="text-align:center;padding:20px;color:var(--red)">Could not connect. Please try again.</div>';
+    });
+}
+
+function buildComplaintCard(c) {
+  const statusLabel = {open:'Open',progress:'In Progress',resolved:'Resolved ✓'};
+  return `<div class="complaint-card ${c.status}">
+    <div class="cc-head">
+      <div><div class="cc-name">${c.name}</div><div class="cc-id">${c.refId}</div></div>
+      <span class="cc-badge ${c.status}">${statusLabel[c.status]||c.status}</span>
+    </div>
+    <div class="cc-cat">${c.category} › ${c.sub_category||''}</div>
+    <div class="cc-desc">${c.description}</div>
+    <div class="cc-meta">
+      <span>📅 ${c.timestamp}</span>
+      <span>📍 ${c.village||''}</span>
+      <span>🔴 Priority: ${c.priority||'Medium'}</span>
+    </div>
+    ${c.update ? '<div class="update-box"><strong>Latest Update:</strong> '+c.update+'</div>' : ''}
+  </div>`;
+}
+
+function loadComplaints() {
+  const list = document.getElementById('complaintList');
+  if(SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+    const demo = [
+      {refId:'LK-2024-051',name:'Sunil Thorat',category:'⚡ Electricity',sub_category:'Burnt transformer',village:'Vitthal Colony',status:'open',timestamp:'15 Jun 2024',description:'Transformer burnt in Vitthal Colony. No power for 3 days. Elderly people badly affected.',priority:'high'},
+      {refId:'LK-2024-049',name:'Anita Shinde',category:'🛣 Roads',sub_category:'Pothole-ridden roads',village:'School Road',status:'progress',timestamp:'10 Jun 2024',description:'Main road to primary school is full of potholes. Children are at risk walking to school.',priority:'med',update:'PWD inspector visited 13 Jun. Repair work scheduled week of 20 Jun.'},
+      {refId:'LK-2024-047',name:'Ramesh Kale',category:'💧 Water Supply',sub_category:'Irregular water supply',village:'Subhash Nagar',status:'progress',timestamp:'12 Jun 2024',description:'Water supply only 10 minutes per day for past 2 weeks.',priority:'high',update:'Pipe repair in progress, expected to resolve by 18 Jun.'},
+      {refId:'LK-2024-043',name:'Manoj Jadhav',category:'📋 Social Issues',sub_category:'Caste/income certificate pending',village:'Ganesh Nagar',status:'resolved',timestamp:'2 Jun 2024',description:'Ration card not issued for 6 months despite multiple visits.',priority:'med'}
+    ];
+    list.innerHTML = demo.map(buildComplaintCard).join('');
+    updateStats(demo);
+    return;
+  }
+  fetch(SCRIPT_URL + '?action=list')
+    .then(r => r.json())
+    .then(data => {
+      if(data && data.length) {
+        list.innerHTML = data.map(buildComplaintCard).join('');
+        updateStats(data);
+      } else list.innerHTML = '<div style="text-align:center;padding:30px;color:var(--muted)">No complaints found.</div>';
+    })
+    .catch(() => list.innerHTML = '<div style="text-align:center;padding:20px;color:var(--red)">Could not load. Check your Script URL.</div>');
+}
+
+function updateStats(data) {
+  document.getElementById('statTotal').textContent = data.length;
+  document.getElementById('statOpen').textContent = data.filter(c=>c.status==='open').length;
+  document.getElementById('statProgress').textContent = data.filter(c=>c.status==='progress').length;
+  document.getElementById('statResolved').textContent = data.filter(c=>c.status==='resolved').length;
+}
+
+function filterList(status, el) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.complaint-card[class*="complaint-card"]').forEach(c => {
+    const s = c.classList[1];
+    c.style.display = (status==='all' || s===status) ? 'block' : 'none';
+  });
+}
+
+// ─── WHATSAPP CHATBOT DEMO — FULL STATEFUL CONVERSATION ───
+let chatState = {
+  step:'menu', name:'', mobile:'', village:'',
+  category:'', categoryLabel:'', subCategory:'', priority:'',
+  description:'', photo:null, photoName:'', trackQuery:''
+};
+
+const CATEGORIES = {
+  '1':'💧 Water Supply & Sanitation','2':'🛣 Roads & Transport',
+  '3':'⚡ Electricity','4':'🌾 Agriculture','5':'🏥 Health Services',
+  '6':'📚 Education','7':'💼 Employment','8':'🤝 Social Issues',
+  '9':'⚖️ Law & Order','10':'🏙 Civic Amenities'
+};
+
+const SUB_PROBLEMS = {
+  '1':['Acute water scarcity','Irregular water supply','Contaminated/dirty water','New borewell/well needed','Water tank repair','Drainage/gutter blockage','Public toilet needed','Other (type below)'],
+  '2':['Pothole-ridden roads','Road needs resurfacing','New bus service needed','Bus stop missing','Bridge needs repair','Streetlight installation','Traffic problem','Other (type below)'],
+  '3':['Frequent power outages','Burnt transformer','New electricity connection','High electricity bill','Insufficient farm power','Streetlight fault','Other (type below)'],
+  '4':['Crop insurance claim','Crop damage compensation','Fertilizer/seed shortage','Irrigation project','Farm pond approval','Electric pump subsidy','Other (type below)'],
+  '5':['No doctor at health centre','Medicine shortage','New clinic needed','No ambulance','Health scheme benefit pending','Other (type below)'],
+  '6':['Teacher shortage','School building repair','New classroom','Student scholarship','Digital education tools','Other (type below)'],
+  '7':['Youth employment','Jobs at MIDC','Self-employment loan','Women SHG support','New business permit','Other (type below)'],
+  '8':['Housing scheme (PM Awas)','Senior citizen pension','Disability assistance','Caste/income certificate','Documents pending','Other (type below)'],
+  '9':['Rising crime','Police station needed','Illegal liquor sales','Land dispute','Other (type below)'],
+  '10':['Street lights not working','Waterlogging in rain','Garden/park maintenance','Drainage line needed','Encroachment removal','Other (type below)']
+};
+
+const PRIORITIES = {'1':'🟢 Low','2':'🟡 Medium','3':'🔴 High / Urgent'};
+
+let pendingPhoto = null;
+let pendingPhotoName = '';
+
+// ── Image handling ──
+function handleImgSelect(input) {
+  const file = input.files[0];
+  if(!file) return;
+  if(file.size > 5*1024*1024) { alert('Image must be under 5MB'); return; }
+  pendingPhoto = file;
+  pendingPhotoName = file.name;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('imgThumb').src = e.target.result;
+    document.getElementById('imgName').textContent = file.name;
+    document.getElementById('imgPreviewBar').style.display = 'flex';
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeImg() {
+  pendingPhoto = null; pendingPhotoName = '';
+  document.getElementById('chatImgInput').value = '';
+  document.getElementById('imgPreviewBar').style.display = 'none';
+}
+
+function sendPhotoMsg(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    const msgs = document.getElementById('chatMsgs');
+    const div = document.createElement('div');
+    div.className = 'msg user';
+    div.innerHTML = '<img src="'+e.target.result+'" style="max-width:180px;border-radius:8px;display:block;margin-bottom:4px"><span style="font-size:11px;color:#666">'+file.name+'</span>';
+    const now = new Date();
+    const t2 = document.createElement('div'); t2.className='time';
+    t2.textContent = now.getHours()+':'+(now.getMinutes()<10?'0':'')+now.getMinutes()+' ✓✓';
+    div.appendChild(t2);
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── Menu ──
+function initChat() {
+  chatState = { step:'menu', name:'', mobile:'', village:'', category:'', categoryLabel:'', subCategory:'', priority:'', description:'', photo:null, photoName:'', trackQuery:'' };
+  showMenu();
+}
+
+function showMenu() {
+  chatState.step = 'menu';
+  addChatMsg('नमस्कार! 🙏 Welcome to <b>Bunty Patil Lokadalat</b> official WhatsApp service.\n\nHow can I help you?','bot',
+    ['📝 File a Complaint','🔍 Track Complaint','📞 Contact Office','🗺 Office Location']);
+}
+
+// ── Main processor ──
+function processInput(text, hasPhoto) {
+  const t = text.trim();
+  const tl = t.toLowerCase();
+
+  if(['menu','main menu','मेनू','0','back','home'].includes(tl)) { showMenu(); return; }
+
+  switch(chatState.step) {
+
+    case 'menu':
+      if(t==='📝 File a Complaint'||tl.includes('file')||tl.includes('complaint')||tl.includes('तक्रार')||t==='1'){
+        chatState.step='ask_name';
+        addChatMsg('📝 <b>तक्रार नोंदवणे सुरू करूया!</b>\n\n👤 Please type your <b>full name</b>:\n(कृपया आपले पूर्ण नाव लिहा)','bot');
+      } else if(t==='🔍 Track Complaint'||tl.includes('track')||tl.includes('status')||t==='2'){
+        chatState.step='ask_track';
+        addChatMsg('🔍 Please share your:\n\n• <b>Complaint ID</b> (e.g. LK-2024-047)\n• OR your <b>registered mobile number</b>','bot');
+      } else if(t==='📞 Contact Office'||tl.includes('contact')||tl.includes('phone')||t==='3'){
+        addChatMsg('📞 <b>Helpline:</b> 1800-XXX-XXXX (Toll Free)\n⏰ Mon–Sat, 10AM–6PM\n📍 Bunty Patil MLA Office, Solapur\n\n✅ Bot available <b>24/7!</b>','bot',['📝 File a Complaint','🏠 Main Menu']);
+      } else if(t==='🗺 Office Location'||tl.includes('location')||tl.includes('address')||t==='4'){
+        addChatMsg('📍 <b>Bunty Patil MLA Office</b>\nSolapur, Maharashtra 413XXX\n⏰ Mon–Sat: 10AM–6PM\n📞 1800-XXX-XXXX','bot',['📝 File a Complaint','🏠 Main Menu']);
+      } else {
+        addChatMsg('Please choose an option 👇','bot',['📝 File a Complaint','🔍 Track Complaint','📞 Contact Office','🗺 Office Location']);
+      }
+      break;
+
+    case 'ask_name':
+      if(t.length<2){addChatMsg('⚠️ Please enter your full name.','bot');return;}
+      chatState.name=t; chatState.step='ask_mobile';
+      addChatMsg('धन्यवाद, <b>'+t+'</b>! 👍\n\n📱 Please type your <b>10-digit mobile number</b>:','bot');
+      break;
+
+    case 'ask_mobile':
+      if(!/^\d{10}$/.test(t.replace(/\s/g,''))){
+        addChatMsg('⚠️ Please enter a valid <b>10-digit mobile number</b>.\nExample: 9876543210','bot'); return;
+      }
+      chatState.mobile=t; chatState.step='ask_village';
+      addChatMsg('📍 What is your <b>village or area name</b>?\n(आपले गाव/परिसराचे नाव सांगा)','bot');
+      break;
+
+    case 'ask_village':
+      if(t.length<2){addChatMsg('⚠️ Please enter your village or area name.','bot');return;}
+      chatState.village=t; chatState.step='ask_category';
+      addChatMsg(
+        '🏛 Which <b>department</b> is your complaint about?\n(कोणत्या विभागाशी?)\n\n1️⃣ 💧 Water Supply\n2️⃣ 🛣 Roads\n3️⃣ ⚡ Electricity\n4️⃣ 🌾 Agriculture\n5️⃣ 🏥 Health\n6️⃣ 📚 Education\n7️⃣ 💼 Employment\n8️⃣ 🤝 Social Issues\n9️⃣ ⚖️ Law & Order\n🔟 🏙 Civic Amenities\n\nTap a number OR type the department name:',
+        'bot', ['1','2','3','4','5','6','7','8','9','10']
+      );
+      break;
+
+    case 'ask_category':
+      // Accept number OR typed department name
+      let catKey = null;
+      // try number
+      if(CATEGORIES[t]) catKey = t;
+      // try typed name match
+      if(!catKey) {
+        for(const [k,v] of Object.entries(CATEGORIES)){
+          if(v.toLowerCase().includes(tl) || tl.includes(k)) { catKey=k; break; }
+        }
+      }
+      // fuzzy: water, road, electricity, etc.
+      const fuzzy = {'water':'1','road':'2','electricity':'3','वीज':'3','पाणी':'1','रस्ते':'2','agri':'4','शेती':'4','health':'5','आरोग्य':'5','edu':'6','शिक्षण':'6','employ':'7','रोजगार':'7','social':'8','सामाजिक':'8','law':'9','कायदा':'9','civic':'10','नागरी':'10'};
+      if(!catKey){ for(const [k,v] of Object.entries(fuzzy)){ if(tl.includes(k)){ catKey=v; break; } } }
+
+      if(!catKey){
+        addChatMsg('⚠️ Please reply with a number <b>1–10</b> or type the department name.','bot',['1','2','3','4','5','6','7','8','9','10']); return;
+      }
+      chatState.category=catKey; chatState.categoryLabel=CATEGORIES[catKey];
+      chatState.step='ask_sub';
+      // Build sub-problem list
+      const probs = SUB_PROBLEMS[catKey];
+      let probMsg = '✅ Dept: <b>'+CATEGORIES[catKey]+'</b>\n\nNow select the <b>specific problem</b>:\n(समस्येचा प्रकार निवडा)\n\n';
+      probs.forEach((p,i) => { probMsg += (i+1)+'️⃣ '+p+'\n'; });
+      probMsg += '\nTap a number OR type your problem directly:';
+      addChatMsg(probMsg, 'bot', probs.slice(0,-1).map((_,i)=>String(i+1)).concat(['✏️ Type my own']));
+      break;
+
+    case 'ask_sub':
+      const probs2 = SUB_PROBLEMS[chatState.category];
+      let subVal = null;
+      // number pick
+      const idx = parseInt(t)-1;
+      if(!isNaN(idx) && idx>=0 && idx<probs2.length && probs2[idx]!=='Other (type below)') subVal=probs2[idx];
+      // quick reply pick
+      if(probs2.includes(t) && t!=='Other (type below)') subVal=t;
+      if(t==='✏️ Type my own'||t==='Other (type below)'||tl.includes('other')||tl.includes('type')){
+        chatState.step='ask_sub_custom';
+        addChatMsg('✏️ Please <b>type your specific problem</b> in your own words:\n(आपली समस्या स्वतः लिहा)','bot'); return;
+      }
+      // free text — accept as-is if long enough
+      if(!subVal && t.length>=3) subVal=t;
+      if(!subVal){ addChatMsg('⚠️ Please pick a number or type your problem.','bot'); return; }
+      chatState.subCategory=subVal;
+      askPriority();
+      break;
+
+    case 'ask_sub_custom':
+      if(t.length<3){addChatMsg('⚠️ Please describe the specific problem (min 3 characters).','bot');return;}
+      chatState.subCategory=t;
+      askPriority();
+      break;
+
+    case 'ask_priority':
+      const pKey=t.charAt(0);
+      if(!PRIORITIES[pKey]){
+        addChatMsg('⚠️ Please reply with <b>1</b>, <b>2</b>, or <b>3</b>.','bot',['1 - Low','2 - Medium','3 - High/Urgent']); return;
+      }
+      chatState.priority=PRIORITIES[pKey];
+      chatState.step='ask_description';
+      addChatMsg('✍️ Please <b>describe your complaint</b> in detail:\n(तक्रार तपशीलवार सांगा)\n\nWhat is the problem? Where exactly? How long has it been?\n\n📎 You can also <b>attach a photo</b> by tapping the 📎 icon below.','bot');
+      break;
+
+    case 'ask_description':
+      // If only a photo was sent with no text, use "Photo attached"
+      if(t.length<3 && !hasPhoto){ addChatMsg('⚠️ Please describe your complaint in more detail.','bot'); return; }
+      chatState.description = t.length>=3 ? t : '(Photo only)';
+      if(hasPhoto){ chatState.photo=true; chatState.photoName=pendingPhotoName; }
+      chatState.step='ask_photo';
+      const photoStatus = hasPhoto ? '\n📸 Photo: <b>'+pendingPhotoName+'</b> ✅ attached' : '';
+      addChatMsg(
+        '📸 Would you like to <b>attach a photo</b> of the problem?\n(समस्येचा फोटो जोडायचा आहे का?)\n\nTap 📎 icon and select an image, then tap Send.\nOR tap "Skip" to continue without photo.'+photoStatus,
+        'bot', hasPhoto ? ['✅ YES - Submit Now','❌ NO - Restart'] : ['📎 Add Photo','⏭ Skip Photo']
+      );
+      break;
+
+    case 'ask_photo':
+      if(t==='📎 Add Photo'||tl.includes('add photo')){
+        addChatMsg('👆 Tap the 📎 paperclip icon next to the text box, select your photo, then tap the send button ➤','bot');
+        return;
+      }
+      if(hasPhoto){ chatState.photo=true; chatState.photoName=pendingPhotoName; }
+      chatState.step='confirm';
+      showConfirmation();
+      break;
+
+    case 'confirm':
+      if(tl==='yes'||tl.startsWith('yes')||tl.includes('submit')||tl==='✅ yes - submit'){
+        chatState.step='submitted';
+        addChatMsg('<i>⏳ Submitting your complaint...</i>','bot');
+        setTimeout(()=>submitChatComplaint(),800);
+      } else if(tl==='no'||tl.startsWith('no')||tl.includes('restart')){
+        addChatMsg('OK, let\'s start over.','bot');
+        setTimeout(()=>{ initChat(); },400);
+      } else {
+        addChatMsg('Please type <b>YES</b> to confirm or <b>NO</b> to restart.','bot',['✅ YES - Submit','❌ NO - Restart']);
+      }
+      break;
+
+    case 'ask_track':
+      chatState.trackQuery=t; chatState.step='menu';
+      setTimeout(()=>{
+        if(t.toLowerCase().startsWith('lk-')||/^\d{10}$/.test(t)){
+          addChatMsg('📋 <b>Complaint Found!</b>\n\n🆔 ID: LK-2024-047\n👤 Name: Ramesh Kale\n🏛 Dept: 💧 Water Supply\n🔍 Issue: Irregular water supply\n📊 Status: <b>🟡 In Progress</b>\n\n🔔 <b>Latest Update:</b>\nWater dept team visited 15 Jun. Pipe repair scheduled 18 Jun.\n\n📞 Urgent help: 1800-XXX-XXXX','bot',['📝 File New Complaint','🏠 Main Menu']);
+        } else {
+          addChatMsg('❌ No complaint found for "<b>'+t+'</b>".\n\nCheck your Complaint ID or mobile number.\n📞 Call: 1800-XXX-XXXX','bot',['🔍 Try Again','📝 File Complaint','🏠 Main Menu']);
+          chatState.step='menu';
+        }
+      },1000);
+      break;
+
+    case 'submitted':
+      addChatMsg('Your complaint was already submitted! Type <b>menu</b> to go back.','bot',['🏠 Main Menu']); break;
+
+    default: showMenu();
+  }
+}
+
+function askPriority() {
+  chatState.step='ask_priority';
+  addChatMsg(
+    '✅ Problem: <b>'+chatState.subCategory+'</b>\n\n⚠️ What is the <b>priority</b>?\n(प्राथमिकता)\n\n1️⃣ 🟢 Low — can wait\n2️⃣ 🟡 Medium — needs attention soon\n3️⃣ 🔴 High / Urgent — immediate action!',
+    'bot', ['1 - Low','2 - Medium','3 - High/Urgent']
+  );
+}
+
+function showConfirmation() {
+  addChatMsg(
+    '✅ <b>Please confirm your details:</b>\n\n👤 Name: <b>'+chatState.name+'</b>\n📱 Mobile: <b>'+chatState.mobile+'</b>\n📍 Village: <b>'+chatState.village+'</b>\n🏛 Dept: <b>'+chatState.categoryLabel+'</b>\n🔍 Problem: <b>'+chatState.subCategory+'</b>\n⚠️ Priority: <b>'+chatState.priority+'</b>\n📝 Details: '+chatState.description+(chatState.photo?'\n📸 Photo: <b>'+chatState.photoName+'</b> attached':'')+'\n\nType <b>YES</b> to submit or <b>NO</b> to restart.',
+    'bot', ['✅ YES - Submit','❌ NO - Restart']
+  );
+}
+
+function submitChatComplaint() {
+  const counter = 52 + Math.floor(Math.random()*50);
+  const refId = 'LK-'+new Date().getFullYear()+'-'+String(counter).padStart(3,'0');
+  addChatMsg(
+    '🎉 <b>तक्रार यशस्वीपणे नोंदवली गेली!</b>\nComplaint submitted successfully!\n\n📋 <b>Complaint ID: '+refId+'</b>\n\n🔔 We will contact <b>'+chatState.name+'</b> on WhatsApp within <b>7 working days</b>.\n\nTo check status later:\n<b>TRACK '+refId+'</b>',
+    'bot', ['🔍 Track This Complaint','📝 New Complaint','🏠 Main Menu']
+  );
+  if(SCRIPT_URL!=='YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'){
+    const fd=new FormData();
+    fd.append('action','submit'); fd.append('refId',refId);
+    fd.append('name',chatState.name); fd.append('mobile',chatState.mobile);
+    fd.append('village',chatState.village); fd.append('category',chatState.categoryLabel);
+    fd.append('sub_category',chatState.subCategory); fd.append('priority',chatState.priority);
+    fd.append('description',chatState.description); fd.append('contact_pref','whatsapp');
+    fd.append('status','Open'); fd.append('has_photo', chatState.photo?'Yes':'No');
+    fetch(SCRIPT_URL,{method:'POST',body:fd}).catch(()=>{});
+  }
+  removeImg();
+}
+
+function userReply(text) {
+  addChatMsg(text,'user');
+  setTimeout(()=>processInput(text,false),500);
+}
+
+function sendChat() {
+  const inp=document.getElementById('chatInput');
+  const t=inp.value.trim();
+  const hasPhoto = pendingPhoto!==null;
+  if(!t && !hasPhoto) return;
+  if(hasPhoto) sendPhotoMsg(pendingPhoto);
+  if(t) addChatMsg(t,'user');
+  const msg = t || '📎 Photo attached';
+  inp.value='';
+  removeImg();
+  setTimeout(()=>processInput(msg, hasPhoto),500);
+}
+
+function addChatMsg(text, type, qrs=[]) {
+  const msgs = document.getElementById('chatMsgs');
+  const now = new Date();
+  const time = now.getHours()+':'+(now.getMinutes()<10?'0':'')+now.getMinutes();
+  const div = document.createElement('div');
+  div.className = 'msg '+type;
+  div.innerHTML = text.replace(/\n/g,'<br>');
+  if(qrs.length) {
+    const wrap = document.createElement('div'); wrap.className='qr-wrap';
+    qrs.forEach(q => {
+      const s = document.createElement('span'); s.className='qr';
+      s.textContent=q; s.onclick=()=>userReply(q); wrap.appendChild(s);
+    });
+    div.appendChild(wrap);
+  }
+  const t2 = document.createElement('div'); t2.className='time';
+  t2.textContent = time + (type==='user'?' ✓✓':'');
+  div.appendChild(t2);
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function showDemoBanner(msg) {
+  const t = document.getElementById('demoToast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3500);
+}
+
+function copyWaNum() {
+  // Demo: scroll to chatbot
+  document.querySelector('.chat-preview').scrollIntoView({behavior:'smooth'});
+  showDemoBanner('📱 In live mode, this opens WhatsApp on your phone with a pre-filled message!');
+}
+
+// ─── INIT ───
+document.getElementById('f_date').valueAsDate = new Date();
+document.getElementById('waDisplayNum').textContent = '+91 XXXXX XXXXX (Demo)';
+
+// Load stats on page load (show demo stats)
+updateStats([
+  {status:'open'},{status:'open'},{status:'progress'},{status:'progress'},
+  {status:'progress'},{status:'resolved'},{status:'resolved'},{status:'resolved'},
+  {status:'resolved'},{status:'resolved'}
+]);
+document.getElementById('statTotal').textContent = '1,248';
+document.getElementById('statOpen').textContent = '45';
+document.getElementById('statProgress').textContent = '312';
+document.getElementById('statResolved').textContent = '891';
+</script>
+<div class="demo-toast" id="demoToast"></div>
+</body>
+</html>
