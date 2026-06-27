@@ -866,7 +866,7 @@ function processInput(text, hasPhoto) {
       break;
 
     case 'ask_name':
-      if(tx.length<2){addChatMsg('⚠️ '+({en:'Please enter your full name.',mr:'कृपया पूर्ण नाव लिहा.',hi:'कृपया पूरा नाम लिखें.'}[activeLang]),'bot');return;}
+      if(tx.length<3){addChatMsg('⚠️ '+({en:'Please enter your full name (min 3 letters).',mr:'कृपया पूर्ण नाव लिहा (किमान ३ अक्षरे).',hi:'कृपया पूरा नाम लिखें (कम से कम 3 अक्षर).'}[activeLang]),'bot');return;}
       chatState.name=tx; chatState.step='ask_mobile';
       addChatMsg(t('ask_mobile').replace('धन्यवाद','धन्यवाद, <b>'+tx+'</b>'),'bot');
       break;
@@ -878,12 +878,12 @@ function processInput(text, hasPhoto) {
       break;
 
     case 'ask_village':
-      if(tx.length<2){return;}
+      const minVil={en:'⚠️ Please enter at least 3 characters.',mr:'⚠️ किमान ३ अक्षरे लिहा.',hi:'⚠️ कम से कम 3 अक्षर लिखें.'}[activeLang];
+      if(tx.length<3){addChatMsg(minVil,'bot');return;}
       chatState.village=tx; chatState.step='ask_category';
-      // Show dept grid
       const catMsg = addChatMsg(t('ask_cat'),'bot');
       const grid = buildDeptGrid();
-      catMsg.insertBefore(grid, catMsg.querySelector('.time'));
+      catMsg.querySelector('.time').before(grid);
       document.getElementById('chatMsgs').scrollTop=99999;
       break;
 
@@ -894,7 +894,7 @@ function processInput(text, hasPhoto) {
       chatState.step='ask_sub';
       const subMsg = addChatMsg(t('ask_sub',chatState.categoryLabel),'bot');
       const subList = buildSubList(dept.key);
-      subMsg.insertBefore(subList, subMsg.querySelector('.time'));
+      subMsg.querySelector('.time').before(subList);
       document.getElementById('chatMsgs').scrollTop=99999;
       break;
 
@@ -1008,7 +1008,7 @@ function addChatMsg(text, type, qrs=[]) {
   const div = document.createElement('div');
   div.className = 'msg '+type;
   div.innerHTML = text.replace(/\n/g,'<br>');
-  if(qrs.length) {
+  if(qrs && qrs.length) {
     const wrap = document.createElement('div'); wrap.className='qr-wrap';
     qrs.forEach(q => {
       const s = document.createElement('span'); s.className='qr';
@@ -1021,6 +1021,7 @@ function addChatMsg(text, type, qrs=[]) {
   div.appendChild(t2);
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
+  return div;  // ← RETURN so callers can append grid/list into it
 }
 
 function showDemoBanner(msg) {
