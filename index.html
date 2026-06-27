@@ -108,31 +108,44 @@
     .track-row input:focus{border-color:var(--pri)}
     .btn-track{padding:10px 18px;background:var(--pri);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px}
 
-    /* ── WHATSAPP / CHATBOT ── */
-    .wa-banner{background:linear-gradient(135deg,#075E54,#128C7E);border-radius:var(--rad);padding:20px;color:#fff;margin-bottom:16px}
-    .wa-banner h3{font-size:16px;margin-bottom:6px}
-    .wa-banner p{font-size:13px;opacity:.85;line-height:1.5;margin-bottom:14px}
-    .btn-wa-outline{background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.5);color:#fff;padding:9px 18px;border-radius:8px;font-weight:700;cursor:pointer;font-size:13px}
-    .wa-number-box{background:#fff;border-radius:8px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;margin-top:14px}
-    .wa-number-box .num{font-size:20px;font-weight:700;color:#075E54;letter-spacing:1px}
-    .wa-number-box .copy-btn{background:#075E54;color:#fff;border:none;border-radius:6px;padding:7px 14px;font-weight:700;cursor:pointer;font-size:13px}
-
-    .chat-preview{background:#E5DDD5;border-radius:var(--rad);overflow:hidden;margin-bottom:16px}
-    .chat-hdr{background:#075E54;color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px}
-    .chat-avatar{width:36px;height:36px;border-radius:50%;background:#128C7E;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0}
-    .chat-info h4{font-size:14px;font-weight:700}
-    .chat-info p{font-size:11px;opacity:.75}
-    .chat-msgs{padding:14px;display:flex;flex-direction:column;gap:10px;min-height:250px;max-height:320px;overflow-y:auto}
-    .msg{max-width:84%;padding:9px 12px;border-radius:10px;font-size:13px;line-height:1.5}
-    .msg.bot{background:#fff;align-self:flex-start;border-radius:2px 10px 10px 10px}
-    .msg.user{background:#DCF8C6;align-self:flex-end;border-radius:10px 2px 10px 10px}
-    .msg .time{font-size:10px;color:#8b9da7;text-align:right;margin-top:4px}
-    .qr-wrap{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-    .qr{background:#fff;border:1.5px solid #25D366;color:#075E54;padding:5px 10px;border-radius:16px;font-size:12px;font-weight:600;cursor:pointer;transition:.15s}
-    .qr:hover{background:#e8fff2}
-    .chat-input-bar{background:#f0f0f0;padding:10px 12px;display:flex;gap:8px;align-items:center;border-top:1px solid #ccc}
-    .chat-input-bar input{flex:1;background:#fff;border:none;border-radius:20px;padding:8px 14px;font-size:13px;outline:none;font-family:inherit}
-    .btn-send{width:36px;height:36px;background:#25D366;border:none;border-radius:50%;cursor:pointer;color:#fff;font-size:15px;display:flex;align-items:center;justify-content:center}
+    /* ── WHATSAPP CHAT ── */
+    .chat-preview{background:#ECE5DD;display:flex;flex-direction:column;overflow:hidden}
+    .chat-hdr{background:#075E54;color:#fff;padding:14px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+    .chat-avatar{width:42px;height:42px;border-radius:50%;background:#128C7E;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;flex-shrink:0;letter-spacing:-.5px}
+    .chat-info h4{font-size:16px;font-weight:700;line-height:1.2}
+    .chat-info p{font-size:12px;opacity:.8;margin-top:2px}
+    .chat-msgs{padding:14px 12px;display:flex;flex-direction:column;gap:8px;flex:1;overflow-y:auto;min-height:0}
+    .msg{max-width:88%;padding:10px 14px;border-radius:12px;font-size:15px;line-height:1.65;word-break:break-word;font-family:'Segoe UI',sans-serif}
+    .msg.bot{background:#fff;align-self:flex-start;border-radius:2px 12px 12px 12px;box-shadow:0 1px 2px rgba(0,0,0,.1)}
+    .msg.user{background:#DCF8C6;align-self:flex-end;border-radius:12px 2px 12px 12px;box-shadow:0 1px 2px rgba(0,0,0,.1)}
+    .msg .time{font-size:11px;color:#999;text-align:right;margin-top:6px}
+    /* Quick reply chips */
+    .qr-wrap{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .qr{background:#fff;border:2px solid #25D366;color:#075E54;padding:9px 14px;border-radius:20px;font-size:14px;font-weight:600;cursor:pointer;transition:.15s;touch-action:manipulation;line-height:1.3}
+    .qr:active,.qr:hover{background:#e8fff2}
+    /* Dept grid cards */
+    .dept-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+    .dept-card{background:#fff;border:2px solid #e0e0e0;border-radius:12px;padding:10px 10px 8px;text-align:center;cursor:pointer;transition:.15s;touch-action:manipulation}
+    .dept-card:active,.dept-card:hover{border-color:#25D366;background:#f0fff4}
+    .dept-card .dept-icon{font-size:26px;display:block;margin-bottom:4px}
+    .dept-card .dept-num{font-size:10px;color:#aaa;font-weight:700;margin-bottom:2px}
+    .dept-card .dept-name{font-size:12px;font-weight:700;color:#1a3a5c;line-height:1.3}
+    /* Sub-problem list */
+    .sub-list{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+    .sub-item{background:#fff;border:1.5px solid #e0e0e0;border-radius:10px;padding:10px 14px;font-size:14px;font-weight:500;color:#1a3a5c;cursor:pointer;display:flex;align-items:center;gap:8px;transition:.15s;touch-action:manipulation}
+    .sub-item:active,.sub-item:hover{border-color:#25D366;background:#f0fff4}
+    .sub-item .sub-num{width:22px;height:22px;border-radius:50%;background:#128C7E;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    /* Language bar */
+    .lang-bar{background:#f7f7f7;border-top:1px solid #ddd;padding:8px 14px;display:flex;gap:8px;align-items:center;flex-shrink:0}
+    .lang-bar span{font-size:12px;color:#888;font-weight:600}
+    .lang-btn{padding:6px 14px;border-radius:16px;border:1.5px solid #ccc;background:#fff;font-size:13px;font-weight:700;cursor:pointer;color:#555;transition:.15s;touch-action:manipulation}
+    .lang-btn.active{background:#075E54;color:#fff;border-color:#075E54}
+    /* Input bar */
+    .chat-input-bar{background:#f0f0f0;padding:10px 14px;display:flex;gap:10px;align-items:center;border-top:1px solid #ddd;flex-shrink:0}
+    .chat-input-bar input{flex:1;background:#fff;border:none;border-radius:24px;padding:13px 18px;font-size:16px;outline:none;font-family:'Segoe UI',sans-serif;min-width:0;color:#222}
+    .chat-input-bar input::placeholder{color:#aaa}
+    .btn-attach{font-size:24px;color:#666;cursor:pointer;flex-shrink:0;padding:0 2px;line-height:1;background:none;border:none;touch-action:manipulation}
+    .btn-send{width:46px;height:46px;background:#25D366;border:none;border-radius:50%;cursor:pointer;color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;touch-action:manipulation}
 
     /* ── STEPS ── */
     .steps{display:flex;flex-direction:column;gap:12px}
@@ -317,41 +330,46 @@
 </div>
 
 <!-- ═══════════════ WHATSAPP BOT ═══════════════ -->
-<div id="tab-whatsapp" class="page" style="padding:12px">
+<div id="tab-whatsapp" class="page" style="padding:0;height:calc(100vh - 118px);display:flex;flex-direction:column">
+  <div class="chat-preview" style="flex:1;border-radius:0;min-height:0">
 
-  <!-- Slim WhatsApp header -->
-  <div style="background:linear-gradient(135deg,#075E54,#128C7E);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:10px">
-    <span style="font-size:28px">💬</span>
-    <div style="color:#fff">
-      <div style="font-size:14px;font-weight:700">WhatsApp Bot</div>
-      <div style="font-size:11px;opacity:.8">Powered by WhatsApp Business API</div>
-    </div>
-    <span style="margin-left:auto;background:rgba(255,255,255,.2);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:12px">DEMO</span>
-  </div>
-
-  <!-- Full-height chat -->
-  <div class="chat-preview" style="border-radius:10px;margin-bottom:0">
+    <!-- Header -->
     <div class="chat-hdr">
       <div class="chat-avatar">BP</div>
       <div class="chat-info">
         <h4>Bunty Patil Jan Seva</h4>
-        <p>🟢 Online · Official WhatsApp Bot</p>
+        <p>🟢 Online · WhatsApp Bot</p>
       </div>
+      <div style="margin-left:auto;background:rgba(255,255,255,.2);color:#fff;font-size:10px;font-weight:800;padding:4px 10px;border-radius:12px;letter-spacing:.5px">DEMO</div>
     </div>
-    <div class="chat-msgs" id="chatMsgs" style="min-height:320px;max-height:calc(100vh - 280px)"></div>
-    <div id="imgPreviewBar" style="display:none;background:#f0f0f0;padding:6px 12px;border-top:1px solid #ccc;align-items:center;gap:8px">
-      <img id="imgThumb" style="width:48px;height:48px;border-radius:6px;object-fit:cover;border:1px solid #ccc">
-      <span style="font-size:12px;color:#555;flex:1" id="imgName">photo.jpg</span>
-      <button onclick="removeImg()" style="background:none;border:none;font-size:18px;cursor:pointer;color:#888">✕</button>
+
+    <!-- Messages -->
+    <div class="chat-msgs" id="chatMsgs"></div>
+
+    <!-- Image preview strip -->
+    <div id="imgPreviewBar" style="display:none;background:#f0f0f0;padding:8px 14px;border-top:1px solid #ddd;align-items:center;gap:10px;flex-shrink:0">
+      <img id="imgThumb" style="width:48px;height:48px;border-radius:8px;object-fit:cover;border:1px solid #ccc">
+      <span style="font-size:13px;color:#555;flex:1" id="imgName">photo.jpg</span>
+      <button onclick="removeImg()" style="background:#eee;border:none;width:28px;height:28px;border-radius:50%;font-size:14px;cursor:pointer;color:#666">✕</button>
     </div>
+
+    <!-- Language bar -->
+    <div class="lang-bar">
+      <span>भाषा:</span>
+      <button class="lang-btn active" id="lang-en" onclick="setLang('en')">English</button>
+      <button class="lang-btn" id="lang-mr" onclick="setLang('mr')">मराठी</button>
+      <button class="lang-btn" id="lang-hi" onclick="setLang('hi')">हिंदी</button>
+    </div>
+
+    <!-- Input bar -->
     <div class="chat-input-bar">
-      <label for="chatImgInput" style="cursor:pointer;font-size:22px;color:#555;flex-shrink:0;line-height:1" title="Attach photo">📎</label>
+      <label for="chatImgInput" class="btn-attach" title="Attach photo">📎</label>
       <input type="file" id="chatImgInput" accept="image/*" style="display:none" onchange="handleImgSelect(this)">
-      <input type="text" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChat()">
+      <input type="text" id="chatInput" placeholder="संदेश लिहा / Type a message..." onkeydown="if(event.key==='Enter')sendChat()">
       <button class="btn-send" onclick="sendChat()">➤</button>
     </div>
-  </div>
 
+  </div>
 </div>
 
 <script>
@@ -586,45 +604,173 @@ function filterList(status, el) {
   });
 }
 
-// ─── WHATSAPP CHATBOT DEMO — FULL STATEFUL CONVERSATION ───
-let chatState = {
-  step:'menu', name:'', mobile:'', village:'',
-  category:'', categoryLabel:'', subCategory:'', priority:'',
-  description:'', photo:null, photoName:'', trackQuery:''
+// ─── WHATSAPP CHATBOT — MULTILINGUAL STATEFUL BOT ───
+let chatState = { step:'menu', name:'', mobile:'', village:'', category:'', categoryLabel:'', subCategory:'', priority:'', description:'', photo:null, photoName:'' };
+let activeLang = 'en';
+let pendingPhoto = null, pendingPhotoName = '';
+
+// ── LANGUAGE STRINGS ──
+const L = {
+  en: {
+    welcome:  'नमस्कार! 🙏 Welcome to <b>Bunty Patil Lokadalat</b>.\n\nHow can I help you today?',
+    menu_btns:['📝 File a Complaint','🔍 Track Complaint','📞 Contact Office','🗺 Office Location'],
+    ask_name: '📝 <b>Let\'s file your complaint!</b>\n\n👤 Please type your <b>full name</b>:',
+    ask_mobile:'धन्यवाद! 👍\n\n📱 Please type your <b>10-digit mobile number</b>:',
+    bad_mobile:'⚠️ Please enter a valid <b>10-digit number</b>.\nExample: 9876543210',
+    ask_village:'📍 What is your <b>village or area</b>?\n(गाव / परिसराचे नाव)',
+    ask_cat:  '🏛 Select the <b>department</b> for your complaint:\n(विभाग निवडा)',
+    ask_sub:  (cat) => `✅ Dept: <b>${cat}</b>\n\nNow select the <b>specific problem</b>:`,
+    ask_other:'✏️ Please <b>type your specific problem</b>:',
+    ask_pri:  (sub) => `✅ Problem: <b>${sub}</b>\n\n⚠️ What is the <b>priority</b>?`,
+    pri_btns: ['1️⃣ 🟢 Low — can wait','2️⃣ 🟡 Medium — needs attention','3️⃣ 🔴 High / Urgent'],
+    ask_desc: '✍️ Please <b>describe your complaint</b> in detail:\n\nWhat is the problem? Where exactly? How long?',
+    ask_photo:'📸 Want to <b>attach a photo</b>? Tap 📎 and select an image, then send.\nOR tap Skip.',
+    photo_btns:['⏭ Skip Photo','📎 Attach Photo'],
+    confirm:  (s) => `✅ <b>Please confirm:</b>\n\n👤 ${s.name}\n📱 ${s.mobile}\n📍 ${s.village}\n🏛 ${s.categoryLabel}\n🔍 ${s.subCategory}\n⚠️ ${s.priority}\n📝 ${s.description}${s.photo?'\n📸 Photo attached':''}`,
+    confirm_btns:['✅ YES — Submit','❌ NO — Restart'],
+    submitting:'⏳ Submitting your complaint...',
+    success:  (name,id) => `🎉 <b>Complaint submitted!</b>\n\n📋 <b>ID: ${id}</b>\n\nWe will contact <b>${name}</b> within 7 working days on WhatsApp.`,
+    contact:  '📞 <b>Helpline:</b> 1800-XXX-XXXX\n⏰ Mon–Sat 10AM–6PM\n📍 Bunty Patil MLA Office, Solapur',
+    location: '📍 <b>Bunty Patil MLA Office</b>\nSolapur, Maharashtra\n⏰ Mon–Sat: 10AM–6PM\n📞 1800-XXX-XXXX',
+    track_ask:'🔍 Please send your:\n• <b>Complaint ID</b> (e.g. LK-2024-047)\n• OR your <b>mobile number</b>',
+    track_found:'📋 <b>Complaint Found!</b>\n\n🆔 ID: LK-2024-047\n👤 Ramesh Kale\n🏛 💧 Water Supply\n📊 Status: <b>🟡 In Progress</b>\n\n🔔 Water dept visited 15 Jun. Pipe repair scheduled 18 Jun.',
+    track_not:'❌ No complaint found.\n\nCheck your ID or mobile number.\n📞 1800-XXX-XXXX',
+    fallback: 'मला समजले नाही. / I did not understand.\n\nPlease choose an option:',
+    back_btn: '🏠 Main Menu',
+    placeholder:'Type a message...'
+  },
+  mr: {
+    welcome:  'नमस्कार! 🙏 <b>बंटी पाटील लोकअदालत</b> मध्ये आपले स्वागत आहे.\n\nआपण कशासाठी आलात?',
+    menu_btns:['📝 तक्रार नोंदवा','🔍 तक्रारीची स्थिती','📞 कार्यालय संपर्क','🗺 कार्यालय पत्ता'],
+    ask_name: '📝 <b>तक्रार नोंदवणे सुरू करूया!</b>\n\n👤 कृपया आपले <b>पूर्ण नाव</b> लिहा:',
+    ask_mobile:'धन्यवाद! 👍\n\n📱 आपला <b>१० अंकी मोबाईल नंबर</b> लिहा:',
+    bad_mobile:'⚠️ कृपया योग्य <b>१० अंकी नंबर</b> द्या.\nउदा: 9876543210',
+    ask_village:'📍 आपले <b>गाव किंवा परिसराचे नाव</b> सांगा:',
+    ask_cat:  '🏛 आपली तक्रार कोणत्या <b>विभागाशी</b> संबंधित आहे?',
+    ask_sub:  (cat) => `✅ विभाग: <b>${cat}</b>\n\nआता <b>समस्येचा प्रकार</b> निवडा:`,
+    ask_other:'✏️ कृपया आपली समस्या <b>स्वतः लिहा</b>:',
+    ask_pri:  (sub) => `✅ समस्या: <b>${sub}</b>\n\n⚠️ तक्रारीची <b>प्राथमिकता</b> काय आहे?`,
+    pri_btns: ['1️⃣ 🟢 कमी — थोडा वेळ आहे','2️⃣ 🟡 मध्यम — लवकर हवे','3️⃣ 🔴 उच्च / तातडी'],
+    ask_desc: '✍️ कृपया आपली तक्रार <b>तपशीलवार</b> सांगा:\n\nसमस्या काय? कुठे? किती दिवसांपासून?',
+    ask_photo:'📸 समस्येचा <b>फोटो जोडायचा</b> आहे का? 📎 दाबा आणि फोटो निवडा.\nकिंवा Skip दाबा.',
+    photo_btns:['⏭ Skip करा','📎 फोटो जोडा'],
+    confirm:  (s) => `✅ <b>कृपया माहिती तपासा:</b>\n\n👤 ${s.name}\n📱 ${s.mobile}\n📍 ${s.village}\n🏛 ${s.categoryLabel}\n🔍 ${s.subCategory}\n⚠️ ${s.priority}\n📝 ${s.description}${s.photo?'\n📸 फोटो जोडला':''}`,
+    confirm_btns:['✅ हो — सबमिट करा','❌ नाही — पुन्हा सुरू'],
+    submitting:'⏳ तक्रार नोंदवत आहे...',
+    success:  (name,id) => `🎉 <b>तक्रार यशस्वीपणे नोंदवली गेली!</b>\n\n📋 <b>तक्रार क्रमांक: ${id}</b>\n\n<b>${name}</b> यांच्याशी ७ कार्यदिवसांत WhatsApp वर संपर्क होईल.`,
+    contact:  '📞 <b>हेल्पलाईन:</b> 1800-XXX-XXXX\n⏰ सोम–शनि सकाळी १०–सायंकाळी ६\n📍 बंटी पाटील आमदार कार्यालय, सोलापूर',
+    location: '📍 <b>बंटी पाटील आमदार कार्यालय</b>\nसोलापूर, महाराष्ट्र\n⏰ सोम–शनि: सकाळी १०–सायंकाळी ६',
+    track_ask:'🔍 कृपया खालीलपैकी एक द्या:\n• <b>तक्रार क्रमांक</b> (उदा. LK-2024-047)\n• किंवा आपला <b>मोबाईल नंबर</b>',
+    track_found:'📋 <b>तक्रार सापडली!</b>\n\n🆔 क्र: LK-2024-047\n👤 रमेश काळे\n🏛 💧 पाणीपुरवठा\n📊 स्थिती: <b>🟡 प्रगतीपथावर</b>\n\n🔔 पाणी विभागाने १५ जून रोजी भेट दिली. पाईप दुरुस्ती १८ जून ला होणार.',
+    track_not:'❌ तक्रार सापडली नाही.\n\nक्रमांक किंवा मोबाईल नंबर तपासा.\n📞 1800-XXX-XXXX',
+    fallback: 'मला समजले नाही. कृपया खालीलपैकी एक निवडा:',
+    back_btn: '🏠 मुख्य मेनू',
+    placeholder:'संदेश लिहा...'
+  },
+  hi: {
+    welcome:  'नमस्ते! 🙏 <b>बंटी पाटील लोकअदालत</b> में आपका स्वागत है.\n\nआज मैं आपकी कैसे मदद कर सकता हूँ?',
+    menu_btns:['📝 शिकायत दर्ज करें','🔍 शिकायत की स्थिति','📞 कार्यालय संपर्क','🗺 कार्यालय पता'],
+    ask_name: '📝 <b>शिकायत दर्ज करते हैं!</b>\n\n👤 कृपया अपना <b>पूरा नाम</b> लिखें:',
+    ask_mobile:'धन्यवाद! 👍\n\n📱 अपना <b>10 अंकों का मोबाइल नंबर</b> लिखें:',
+    bad_mobile:'⚠️ कृपया सही <b>10 अंकों का नंबर</b> दें.\nउदाहरण: 9876543210',
+    ask_village:'📍 आपके <b>गांव या क्षेत्र का नाम</b> बताएं:',
+    ask_cat:  '🏛 आपकी शिकायत किस <b>विभाग</b> से संबंधित है?',
+    ask_sub:  (cat) => `✅ विभाग: <b>${cat}</b>\n\nअब <b>समस्या का प्रकार</b> चुनें:`,
+    ask_other:'✏️ कृपया अपनी समस्या <b>खुद लिखें</b>:',
+    ask_pri:  (sub) => `✅ समस्या: <b>${sub}</b>\n\n⚠️ शिकायत की <b>प्राथमिकता</b> क्या है?`,
+    pri_btns: ['1️⃣ 🟢 कम — समय है','2️⃣ 🟡 मध्यम — जल्द चाहिए','3️⃣ 🔴 उच्च / तत्काल'],
+    ask_desc: '✍️ कृपया अपनी शिकायत <b>विस्तार से</b> बताएं:\n\nसमस्या क्या है? कहाँ? कब से?',
+    ask_photo:'📸 समस्या की <b>फोटो जोड़ना</b> चाहते हैं? 📎 दबाएं.\nया Skip करें.',
+    photo_btns:['⏭ Skip करें','📎 फोटो जोड़ें'],
+    confirm:  (s) => `✅ <b>कृपया जानकारी जांचें:</b>\n\n👤 ${s.name}\n📱 ${s.mobile}\n📍 ${s.village}\n🏛 ${s.categoryLabel}\n🔍 ${s.subCategory}\n⚠️ ${s.priority}\n📝 ${s.description}${s.photo?'\n📸 फोटो संलग्न':''}`,
+    confirm_btns:['✅ हाँ — सबमिट करें','❌ नहीं — फिर से शुरू'],
+    submitting:'⏳ शिकायत दर्ज की जा रही है...',
+    success:  (name,id) => `🎉 <b>शिकायत सफलतापूर्वक दर्ज हुई!</b>\n\n📋 <b>शिकायत ID: ${id}</b>\n\n<b>${name}</b> से 7 कार्य दिवसों में WhatsApp पर संपर्क होगा.`,
+    contact:  '📞 <b>हेल्पलाइन:</b> 1800-XXX-XXXX\n⏰ सोम–शनि सुबह 10–शाम 6\n📍 बंटी पाटील MLA कार्यालय, सोलापुर',
+    location: '📍 <b>बंटी पाटील MLA कार्यालय</b>\nसोलापुर, महाराष्ट्र\n⏰ सोम–शनि: सुबह 10–शाम 6',
+    track_ask:'🔍 कृपया निम्न में से एक दें:\n• <b>शिकायत ID</b> (जैसे LK-2024-047)\n• या आपका <b>मोबाइल नंबर</b>',
+    track_found:'📋 <b>शिकायत मिली!</b>\n\n🆔 ID: LK-2024-047\n👤 रमेश काले\n🏛 💧 जल आपूर्ति\n📊 स्थिति: <b>🟡 प्रगति में</b>\n\n🔔 विभाग टीम ने 15 जून को दौरा किया. मरम्मत 18 जून को होगी.',
+    track_not:'❌ शिकायत नहीं मिली.\n\nID या मोबाइल नंबर जांचें.\n📞 1800-XXX-XXXX',
+    fallback: 'मैं समझ नहीं पाया. कृपया नीचे से चुनें:',
+    back_btn: '🏠 मुख्य मेनू',
+    placeholder:'संदेश लिखें...'
+  }
 };
 
-const CATEGORIES = {
-  '1':'💧 Water Supply & Sanitation','2':'🛣 Roads & Transport',
-  '3':'⚡ Electricity','4':'🌾 Agriculture','5':'🏥 Health Services',
-  '6':'📚 Education','7':'💼 Employment','8':'🤝 Social Issues',
-  '9':'⚖️ Law & Order','10':'🏙 Civic Amenities'
-};
+// Department data with icons (same for all languages)
+const DEPTS = [
+  {key:'1', icon:'💧', name:{en:'Water Supply',    mr:'पाणीपुरवठा',   hi:'जल आपूर्ति'}},
+  {key:'2', icon:'🛣',  name:{en:'Roads',           mr:'रस्ते',         hi:'सड़क'}},
+  {key:'3', icon:'⚡',  name:{en:'Electricity',     mr:'वीज',           hi:'बिजली'}},
+  {key:'4', icon:'🌾', name:{en:'Agriculture',     mr:'शेती',          hi:'कृषि'}},
+  {key:'5', icon:'🏥', name:{en:'Health',           mr:'आरोग्य',        hi:'स्वास्थ्य'}},
+  {key:'6', icon:'📚', name:{en:'Education',        mr:'शिक्षण',        hi:'शिक्षा'}},
+  {key:'7', icon:'💼', name:{en:'Employment',       mr:'रोजगार',        hi:'रोजगार'}},
+  {key:'8', icon:'🤝', name:{en:'Social Issues',   mr:'सामाजिक',       hi:'सामाजिक'}},
+  {key:'9', icon:'⚖️', name:{en:'Law & Order',     mr:'कायदा',         hi:'कानून'}},
+  {key:'10',icon:'🏙', name:{en:'Civic Amenities', mr:'नागरी सुविधा', hi:'नागरिक सुविधा'}}
+];
 
 const SUB_PROBLEMS = {
-  '1':['Acute water scarcity','Irregular water supply','Contaminated/dirty water','New borewell/well needed','Water tank repair','Drainage/gutter blockage','Public toilet needed','Other (type below)'],
-  '2':['Pothole-ridden roads','Road needs resurfacing','New bus service needed','Bus stop missing','Bridge needs repair','Streetlight installation','Traffic problem','Other (type below)'],
-  '3':['Frequent power outages','Burnt transformer','New electricity connection','High electricity bill','Insufficient farm power','Streetlight fault','Other (type below)'],
-  '4':['Crop insurance claim','Crop damage compensation','Fertilizer/seed shortage','Irrigation project','Farm pond approval','Electric pump subsidy','Other (type below)'],
-  '5':['No doctor at health centre','Medicine shortage','New clinic needed','No ambulance','Health scheme benefit pending','Other (type below)'],
-  '6':['Teacher shortage','School building repair','New classroom','Student scholarship','Digital education tools','Other (type below)'],
-  '7':['Youth employment','Jobs at MIDC','Self-employment loan','Women SHG support','New business permit','Other (type below)'],
-  '8':['Housing scheme (PM Awas)','Senior citizen pension','Disability assistance','Caste/income certificate','Documents pending','Other (type below)'],
-  '9':['Rising crime','Police station needed','Illegal liquor sales','Land dispute','Other (type below)'],
-  '10':['Street lights not working','Waterlogging in rain','Garden/park maintenance','Drainage line needed','Encroachment removal','Other (type below)']
+  '1':{en:['Acute water scarcity','Irregular water supply','Contaminated water','New borewell needed','Water tank repair','Drainage blockage','Public toilet needed'],
+       mr:['तीव्र पाणीटंचाई','अनियमित पाणीपुरवठा','दूषित पाणी','नवीन बोअरवेल हवे','पाण्याच्या टाकीची दुरुस्ती','गटार तुंबले','सार्वजनिक शौचालय हवे'],
+       hi:['तीव्र पानी की कमी','अनियमित जल आपूर्ति','दूषित पानी','नई बोरवेल चाहिए','पानी की टंकी मरम्मत','नाली जाम','सार्वजनिक शौचालय चाहिए']},
+  '2':{en:['Pothole-ridden roads','Road resurfacing needed','New bus service','Bus stop missing','Bridge repair','Streetlight needed','Traffic problem'],
+       mr:['रस्त्यावर खड्डे','डांबरीकरण हवे','बससेवा हवी','बसथांबा नाही','पुलाची दुरुस्ती','स्ट्रीटलाईट हवे','वाहतूक समस्या'],
+       hi:['सड़क में गड्ढे','सड़क मरम्मत चाहिए','बस सेवा चाहिए','बस स्टॉप नहीं','पुल मरम्मत','स्ट्रीट लाइट चाहिए','ट्रैफिक समस्या']},
+  '3':{en:['Frequent power cuts','Burnt transformer','New connection needed','High electricity bill','Insufficient farm power'],
+       mr:['वारंवार वीज खंडित','ट्रान्सफॉर्मर जळाला','नवीन वीज जोडणी','वीजबिल जास्त','शेतीसाठी वीज कमी'],
+       hi:['बार-बार बिजली कटौती','ट्रांसफार्मर जला','नया कनेक्शन चाहिए','बिजली बिल ज़्यादा','खेती के लिए बिजली कम']},
+  '4':{en:['Crop insurance claim','Crop damage compensation','Fertilizer/seed shortage','Irrigation project','Farm pond approval'],
+       mr:['पीक विमा दावा','पीक नुकसान भरपाई','खत-बियाणे टंचाई','सिंचन प्रकल्प','शेततळे मंजुरी'],
+       hi:['फसल बीमा दावा','फसल नुकसान मुआवज़ा','खाद-बीज की कमी','सिंचाई परियोजना','फार्म तालाब मंजूरी']},
+  '5':{en:['No doctor at centre','Medicine shortage','New clinic needed','No ambulance','Health scheme pending'],
+       mr:['डॉक्टर नाहीत','औषधे नाहीत','नवीन दवाखाना हवा','रुग्णवाहिका नाही','आरोग्य योजना लाभ'],
+       hi:['डॉक्टर नहीं है','दवाई नहीं है','नया क्लिनिक चाहिए','एम्बुलेंस नहीं','स्वास्थ्य योजना लाभ']},
+  '6':{en:['Teacher shortage','School building repair','New classroom needed','Student scholarship','Digital tools'],
+       mr:['शिक्षक कमी','शाळा इमारत दुरुस्ती','नवीन वर्गखोली','विद्यार्थी शिष्यवृत्ती','डिजिटल साधने'],
+       hi:['शिक्षक की कमी','स्कूल भवन मरम्मत','नई कक्षा चाहिए','छात्र छात्रवृत्ति','डिजिटल उपकरण']},
+  '7':{en:['Youth employment','Jobs at MIDC','Self-employment loan','Women SHG support','Business permit'],
+       mr:['तरुणांना रोजगार','MIDC मध्ये नोकरी','स्वयंरोजगार कर्ज','महिला बचत गट','उद्योग परवानगी'],
+       hi:['युवा रोजगार','MIDC में नौकरी','स्वरोजगार ऋण','महिला स्वयं सहायता समूह','व्यापार अनुमति']},
+  '8':{en:['Housing scheme','Senior citizen pension','Disability assistance','Caste/income certificate','Documents pending'],
+       mr:['घरकुल योजना','ज्येष्ठ नागरिक पेन्शन','अपंग मदत','जात/उत्पन्न दाखला','कागदपत्रे प्रलंबित'],
+       hi:['आवास योजना','वरिष्ठ नागरिक पेंशन','विकलांग सहायता','जाति/आय प्रमाणपत्र','दस्तावेज़ लंबित']},
+  '9':{en:['Rising crime','Police station needed','Illegal liquor sales','Land dispute'],
+       mr:['गुन्हेगारी वाढली','पोलीस चौकी हवी','अवैध दारू विक्री','जमीन वाद'],
+       hi:['बढ़ता अपराध','पुलिस चौकी चाहिए','अवैध शराब बिक्री','भूमि विवाद']},
+  '10':{en:['Street lights not working','Waterlogging in rain','Garden maintenance','Drainage needed','Encroachment removal'],
+        mr:['पथदिवे बंद','पावसाळ्यात पाणी साचते','उद्यान देखभाल','ड्रेनेज लाईन हवी','अतिक्रमण हटवा'],
+        hi:['स्ट्रीट लाइट बंद','बारिश में पानी भरना','बाग रखरखाव','ड्रेनेज लाइन चाहिए','अतिक्रमण हटाएं']}
 };
 
-const PRIORITIES = {'1':'🟢 Low','2':'🟡 Medium','3':'🔴 High / Urgent'};
+const PRIORITIES_MAP = {
+  '1':{en:'🟢 Low', mr:'🟢 कमी', hi:'🟢 कम'},
+  '2':{en:'🟡 Medium', mr:'🟡 मध्यम', hi:'🟡 मध्यम'},
+  '3':{en:'🔴 High / Urgent', mr:'🔴 उच्च / तातडी', hi:'🔴 उच्च / तत्काल'}
+};
 
-let pendingPhoto = null;
-let pendingPhotoName = '';
+function t(key, ...args) {
+  const str = L[activeLang][key];
+  return typeof str === 'function' ? str(...args) : str;
+}
+
+// ── Language switch ──
+function setLang(lang) {
+  activeLang = lang;
+  ['en','mr','hi'].forEach(l => document.getElementById('lang-'+l).classList.toggle('active', l===lang));
+  document.getElementById('chatInput').placeholder = L[lang].placeholder;
+  // Reset and restart
+  document.getElementById('chatMsgs').innerHTML = '';
+  initChat();
+}
 
 // ── Image handling ──
 function handleImgSelect(input) {
   const file = input.files[0];
   if(!file) return;
   if(file.size > 5*1024*1024) { alert('Image must be under 5MB'); return; }
-  pendingPhoto = file;
-  pendingPhotoName = file.name;
+  pendingPhoto = file; pendingPhotoName = file.name;
   const reader = new FileReader();
   reader.onload = e => {
     document.getElementById('imgThumb').src = e.target.result;
@@ -633,259 +779,226 @@ function handleImgSelect(input) {
   };
   reader.readAsDataURL(file);
 }
-
 function removeImg() {
-  pendingPhoto = null; pendingPhotoName = '';
-  document.getElementById('chatImgInput').value = '';
-  document.getElementById('imgPreviewBar').style.display = 'none';
+  pendingPhoto=null; pendingPhotoName='';
+  document.getElementById('chatImgInput').value='';
+  document.getElementById('imgPreviewBar').style.display='none';
 }
-
 function sendPhotoMsg(file) {
   const reader = new FileReader();
   reader.onload = e => {
     const msgs = document.getElementById('chatMsgs');
-    const div = document.createElement('div');
-    div.className = 'msg user';
-    div.innerHTML = '<img src="'+e.target.result+'" style="max-width:180px;border-radius:8px;display:block;margin-bottom:4px"><span style="font-size:11px;color:#666">'+file.name+'</span>';
-    const now = new Date();
-    const t2 = document.createElement('div'); t2.className='time';
-    t2.textContent = now.getHours()+':'+(now.getMinutes()<10?'0':'')+now.getMinutes()+' ✓✓';
-    div.appendChild(t2);
-    msgs.appendChild(div);
-    msgs.scrollTop = msgs.scrollHeight;
+    const div = document.createElement('div'); div.className='msg user';
+    div.innerHTML = '<img src="'+e.target.result+'" style="max-width:200px;border-radius:8px;display:block;margin-bottom:4px"><span style="font-size:11px;color:#666">'+file.name+'</span>';
+    const now=new Date(); const t2=document.createElement('div'); t2.className='time';
+    t2.textContent=now.getHours()+':'+(now.getMinutes()<10?'0':'')+now.getMinutes()+' ✓✓';
+    div.appendChild(t2); msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight;
   };
   reader.readAsDataURL(file);
 }
 
-// ── Menu ──
+// ── Init & Menu ──
 function initChat() {
-  chatState = { step:'menu', name:'', mobile:'', village:'', category:'', categoryLabel:'', subCategory:'', priority:'', description:'', photo:null, photoName:'', trackQuery:'' };
+  chatState = { step:'menu', name:'', mobile:'', village:'', category:'', categoryLabel:'', subCategory:'', priority:'', description:'', photo:null, photoName:'' };
   showMenu();
 }
-
 function showMenu() {
-  chatState.step = 'menu';
-  addChatMsg('नमस्कार! 🙏 Welcome to <b>Bunty Patil Lokadalat</b> official WhatsApp service.\n\nHow can I help you?','bot',
-    ['📝 File a Complaint','🔍 Track Complaint','📞 Contact Office','🗺 Office Location']);
+  chatState.step='menu';
+  addChatMsg(t('welcome'),'bot',t('menu_btns'));
 }
 
-// ── Main processor ──
-function processInput(text, hasPhoto) {
-  const t = text.trim();
-  const tl = t.toLowerCase();
+// ── Dept grid builder ──
+function buildDeptGrid() {
+  const wrap = document.createElement('div'); wrap.className='dept-grid';
+  DEPTS.forEach(d => {
+    const card = document.createElement('div'); card.className='dept-card';
+    card.innerHTML = '<span class="dept-icon">'+d.icon+'</span><div class="dept-num">'+d.key+'</div><div class="dept-name">'+d.name[activeLang]+'</div>';
+    card.onclick = () => userReply(d.key);
+    wrap.appendChild(card);
+  });
+  return wrap;
+}
 
-  if(['menu','main menu','मेनू','0','back','home'].includes(tl)) { showMenu(); return; }
+// ── Sub-problem list builder ──
+function buildSubList(catKey) {
+  const probs = SUB_PROBLEMS[catKey][activeLang];
+  const wrap = document.createElement('div'); wrap.className='sub-list';
+  probs.forEach((p,i) => {
+    const item = document.createElement('div'); item.className='sub-item';
+    item.innerHTML = '<span class="sub-num">'+(i+1)+'</span>'+p;
+    item.onclick = () => userReply(p);
+    wrap.appendChild(item);
+  });
+  // "Other" option
+  const other = document.createElement('div'); other.className='sub-item';
+  const otherLabel = {en:'✏️ Type my own problem',mr:'✏️ स्वतः लिहा',hi:'✏️ खुद लिखें'}[activeLang];
+  other.innerHTML = '<span class="sub-num" style="background:#e67e22">✏</span>'+otherLabel;
+  other.onclick = () => {
+    chatState.step='ask_sub_custom';
+    addChatMsg(t('ask_other'),'bot');
+  };
+  wrap.appendChild(other);
+  return wrap;
+}
+
+// ── Main input processor ──
+function processInput(text, hasPhoto) {
+  const tx = text.trim();
+  const tl = tx.toLowerCase();
+  const back = [t('back_btn').toLowerCase(),'menu','back','0','home','मेनू','मुख्य मेनू'];
+  if(back.some(b=>tl===b)) { showMenu(); return; }
 
   switch(chatState.step) {
-
     case 'menu':
-      if(t==='📝 File a Complaint'||tl.includes('file')||tl.includes('complaint')||tl.includes('तक्रार')||t==='1'){
+      if(['📝 File a Complaint','📝 तक्रार नोंदवा','📝 शिकायत दर्ज करें','1'].includes(tx)||tl.includes('file')||tl.includes('complaint')||tl.includes('तक्रार')||tl.includes('शिकायत')) {
         chatState.step='ask_name';
-        addChatMsg('📝 <b>तक्रार नोंदवणे सुरू करूया!</b>\n\n👤 Please type your <b>full name</b>:\n(कृपया आपले पूर्ण नाव लिहा)','bot');
-      } else if(t==='🔍 Track Complaint'||tl.includes('track')||tl.includes('status')||t==='2'){
+        addChatMsg(t('ask_name'),'bot');
+      } else if(['🔍 Track Complaint','🔍 तक्रारीची स्थिती','🔍 शिकायत की स्थिति','2'].includes(tx)||tl.includes('track')||tl.includes('स्थिती')||tl.includes('स्थिति')) {
         chatState.step='ask_track';
-        addChatMsg('🔍 Please share your:\n\n• <b>Complaint ID</b> (e.g. LK-2024-047)\n• OR your <b>registered mobile number</b>','bot');
-      } else if(t==='📞 Contact Office'||tl.includes('contact')||tl.includes('phone')||t==='3'){
-        addChatMsg('📞 <b>Helpline:</b> 1800-XXX-XXXX (Toll Free)\n⏰ Mon–Sat, 10AM–6PM\n📍 Bunty Patil MLA Office, Solapur\n\n✅ Bot available <b>24/7!</b>','bot',['📝 File a Complaint','🏠 Main Menu']);
-      } else if(t==='🗺 Office Location'||tl.includes('location')||tl.includes('address')||t==='4'){
-        addChatMsg('📍 <b>Bunty Patil MLA Office</b>\nSolapur, Maharashtra 413XXX\n⏰ Mon–Sat: 10AM–6PM\n📞 1800-XXX-XXXX','bot',['📝 File a Complaint','🏠 Main Menu']);
+        addChatMsg(t('track_ask'),'bot');
+      } else if(['📞 Contact Office','📞 कार्यालय संपर्क','3'].includes(tx)||tl.includes('contact')||tl.includes('संपर्क')) {
+        addChatMsg(t('contact'),'bot',[t('menu_btns')[0],t('back_btn')]);
+      } else if(['🗺 Office Location','🗺 कार्यालय पत्ता','4'].includes(tx)||tl.includes('location')||tl.includes('पत्ता')) {
+        addChatMsg(t('location'),'bot',[t('menu_btns')[0],t('back_btn')]);
       } else {
-        addChatMsg('Please choose an option 👇','bot',['📝 File a Complaint','🔍 Track Complaint','📞 Contact Office','🗺 Office Location']);
+        addChatMsg(t('fallback'),'bot',t('menu_btns'));
       }
       break;
 
     case 'ask_name':
-      if(t.length<2){addChatMsg('⚠️ Please enter your full name.','bot');return;}
-      chatState.name=t; chatState.step='ask_mobile';
-      addChatMsg('धन्यवाद, <b>'+t+'</b>! 👍\n\n📱 Please type your <b>10-digit mobile number</b>:','bot');
+      if(tx.length<2){addChatMsg('⚠️ '+({en:'Please enter your full name.',mr:'कृपया पूर्ण नाव लिहा.',hi:'कृपया पूरा नाम लिखें.'}[activeLang]),'bot');return;}
+      chatState.name=tx; chatState.step='ask_mobile';
+      addChatMsg(t('ask_mobile').replace('धन्यवाद','धन्यवाद, <b>'+tx+'</b>'),'bot');
       break;
 
     case 'ask_mobile':
-      if(!/^\d{10}$/.test(t.replace(/\s/g,''))){
-        addChatMsg('⚠️ Please enter a valid <b>10-digit mobile number</b>.\nExample: 9876543210','bot'); return;
-      }
-      chatState.mobile=t; chatState.step='ask_village';
-      addChatMsg('📍 What is your <b>village or area name</b>?\n(आपले गाव/परिसराचे नाव सांगा)','bot');
+      if(!/^\d{10}$/.test(tx.replace(/\s/g,''))){addChatMsg(t('bad_mobile'),'bot');return;}
+      chatState.mobile=tx; chatState.step='ask_village';
+      addChatMsg(t('ask_village'),'bot');
       break;
 
     case 'ask_village':
-      if(t.length<2){addChatMsg('⚠️ Please enter your village or area name.','bot');return;}
-      chatState.village=t; chatState.step='ask_category';
-      addChatMsg(
-        '🏛 Which <b>department</b> is your complaint about?\n(कोणत्या विभागाशी?)\n\n1️⃣ 💧 Water Supply\n2️⃣ 🛣 Roads\n3️⃣ ⚡ Electricity\n4️⃣ 🌾 Agriculture\n5️⃣ 🏥 Health\n6️⃣ 📚 Education\n7️⃣ 💼 Employment\n8️⃣ 🤝 Social Issues\n9️⃣ ⚖️ Law & Order\n🔟 🏙 Civic Amenities\n\nTap a number OR type the department name:',
-        'bot', ['1','2','3','4','5','6','7','8','9','10']
-      );
+      if(tx.length<2){return;}
+      chatState.village=tx; chatState.step='ask_category';
+      // Show dept grid
+      const catMsg = addChatMsg(t('ask_cat'),'bot');
+      const grid = buildDeptGrid();
+      catMsg.insertBefore(grid, catMsg.querySelector('.time'));
+      document.getElementById('chatMsgs').scrollTop=99999;
       break;
 
     case 'ask_category':
-      // Accept number OR typed department name
-      let catKey = null;
-      // try number
-      if(CATEGORIES[t]) catKey = t;
-      // try typed name match
-      if(!catKey) {
-        for(const [k,v] of Object.entries(CATEGORIES)){
-          if(v.toLowerCase().includes(tl) || tl.includes(k)) { catKey=k; break; }
-        }
-      }
-      // fuzzy: water, road, electricity, etc.
-      const fuzzy = {'water':'1','road':'2','electricity':'3','वीज':'3','पाणी':'1','रस्ते':'2','agri':'4','शेती':'4','health':'5','आरोग्य':'5','edu':'6','शिक्षण':'6','employ':'7','रोजगार':'7','social':'8','सामाजिक':'8','law':'9','कायदा':'9','civic':'10','नागरी':'10'};
-      if(!catKey){ for(const [k,v] of Object.entries(fuzzy)){ if(tl.includes(k)){ catKey=v; break; } } }
-
-      if(!catKey){
-        addChatMsg('⚠️ Please reply with a number <b>1–10</b> or type the department name.','bot',['1','2','3','4','5','6','7','8','9','10']); return;
-      }
-      chatState.category=catKey; chatState.categoryLabel=CATEGORIES[catKey];
+      const dept = DEPTS.find(d=>d.key===tx||Object.values(d.name).some(n=>n.toLowerCase()===tl));
+      if(!dept){addChatMsg('⚠️ 1–10 '+({en:'please.',mr:'कृपया.',hi:'कृपया.'}[activeLang]),'bot');return;}
+      chatState.category=dept.key; chatState.categoryLabel=dept.icon+' '+dept.name[activeLang];
       chatState.step='ask_sub';
-      // Build sub-problem list
-      const probs = SUB_PROBLEMS[catKey];
-      let probMsg = '✅ Dept: <b>'+CATEGORIES[catKey]+'</b>\n\nNow select the <b>specific problem</b>:\n(समस्येचा प्रकार निवडा)\n\n';
-      probs.forEach((p,i) => { probMsg += (i+1)+'️⃣ '+p+'\n'; });
-      probMsg += '\nTap a number OR type your problem directly:';
-      addChatMsg(probMsg, 'bot', probs.slice(0,-1).map((_,i)=>String(i+1)).concat(['✏️ Type my own']));
+      const subMsg = addChatMsg(t('ask_sub',chatState.categoryLabel),'bot');
+      const subList = buildSubList(dept.key);
+      subMsg.insertBefore(subList, subMsg.querySelector('.time'));
+      document.getElementById('chatMsgs').scrollTop=99999;
       break;
 
     case 'ask_sub':
-      const probs2 = SUB_PROBLEMS[chatState.category];
-      let subVal = null;
-      // number pick
-      const idx = parseInt(t)-1;
-      if(!isNaN(idx) && idx>=0 && idx<probs2.length && probs2[idx]!=='Other (type below)') subVal=probs2[idx];
-      // quick reply pick
-      if(probs2.includes(t) && t!=='Other (type below)') subVal=t;
-      if(t==='✏️ Type my own'||t==='Other (type below)'||tl.includes('other')||tl.includes('type')){
-        chatState.step='ask_sub_custom';
-        addChatMsg('✏️ Please <b>type your specific problem</b> in your own words:\n(आपली समस्या स्वतः लिहा)','bot'); return;
-      }
-      // free text — accept as-is if long enough
-      if(!subVal && t.length>=3) subVal=t;
-      if(!subVal){ addChatMsg('⚠️ Please pick a number or type your problem.','bot'); return; }
-      chatState.subCategory=subVal;
+      const probs = SUB_PROBLEMS[chatState.category][activeLang];
+      const idx = parseInt(tx)-1;
+      let sub = null;
+      if(!isNaN(idx)&&idx>=0&&idx<probs.length) sub=probs[idx];
+      else if(probs.includes(tx)) sub=tx;
+      else if(tx.length>=3) sub=tx;
+      if(!sub){addChatMsg('⚠️ '+({en:'Please select or type a problem.',mr:'कृपया समस्या निवडा किंवा लिहा.',hi:'कृपया समस्या चुनें या लिखें.'}[activeLang]),'bot');return;}
+      chatState.subCategory=sub;
       askPriority();
       break;
 
     case 'ask_sub_custom':
-      if(t.length<3){addChatMsg('⚠️ Please describe the specific problem (min 3 characters).','bot');return;}
-      chatState.subCategory=t;
-      askPriority();
-      break;
+      if(tx.length<3){return;}
+      chatState.subCategory=tx; askPriority(); break;
 
     case 'ask_priority':
-      const pKey=t.charAt(0);
-      if(!PRIORITIES[pKey]){
-        addChatMsg('⚠️ Please reply with <b>1</b>, <b>2</b>, or <b>3</b>.','bot',['1 - Low','2 - Medium','3 - High/Urgent']); return;
-      }
-      chatState.priority=PRIORITIES[pKey];
+      const pk=tx.charAt(0);
+      if(!PRIORITIES_MAP[pk]){addChatMsg('⚠️ 1, 2 '+({en:'or',mr:'किंवा',hi:'या'}[activeLang])+' 3','bot',t('pri_btns'));return;}
+      chatState.priority=PRIORITIES_MAP[pk][activeLang];
       chatState.step='ask_description';
-      addChatMsg('✍️ Please <b>describe your complaint</b> in detail:\n(तक्रार तपशीलवार सांगा)\n\nWhat is the problem? Where exactly? How long has it been?\n\n📎 You can also <b>attach a photo</b> by tapping the 📎 icon below.','bot');
+      addChatMsg(t('ask_desc'),'bot');
       break;
 
     case 'ask_description':
-      // If only a photo was sent with no text, use "Photo attached"
-      if(t.length<3 && !hasPhoto){ addChatMsg('⚠️ Please describe your complaint in more detail.','bot'); return; }
-      chatState.description = t.length>=3 ? t : '(Photo only)';
-      if(hasPhoto){ chatState.photo=true; chatState.photoName=pendingPhotoName; }
+      if(tx.length<5&&!hasPhoto){addChatMsg('⚠️ '+({en:'Please describe in more detail.',mr:'अधिक तपशील द्या.',hi:'अधिक विवरण दें.'}[activeLang]),'bot');return;}
+      chatState.description=tx.length>=3?tx:'(Photo only)';
+      if(hasPhoto){chatState.photo=true;chatState.photoName=pendingPhotoName;}
       chatState.step='ask_photo';
-      const photoStatus = hasPhoto ? '\n📸 Photo: <b>'+pendingPhotoName+'</b> ✅ attached' : '';
-      addChatMsg(
-        '📸 Would you like to <b>attach a photo</b> of the problem?\n(समस्येचा फोटो जोडायचा आहे का?)\n\nTap 📎 icon and select an image, then tap Send.\nOR tap "Skip" to continue without photo.'+photoStatus,
-        'bot', hasPhoto ? ['✅ YES - Submit Now','❌ NO - Restart'] : ['📎 Add Photo','⏭ Skip Photo']
-      );
+      addChatMsg(t('ask_photo'),'bot',t('photo_btns'));
       break;
 
     case 'ask_photo':
-      if(t==='📎 Add Photo'||tl.includes('add photo')){
-        addChatMsg('👆 Tap the 📎 paperclip icon next to the text box, select your photo, then tap the send button ➤','bot');
-        return;
-      }
-      if(hasPhoto){ chatState.photo=true; chatState.photoName=pendingPhotoName; }
+      if(hasPhoto){chatState.photo=true;chatState.photoName=pendingPhotoName;}
       chatState.step='confirm';
-      showConfirmation();
+      addChatMsg(t('confirm',chatState),'bot',t('confirm_btns'));
       break;
 
     case 'confirm':
-      if(tl==='yes'||tl.startsWith('yes')||tl.includes('submit')||tl==='✅ yes - submit'){
+      if(tl.startsWith('yes')||tl.startsWith('हो')||tl.startsWith('हाँ')||tl.includes('submit')||tl.includes('सबमिट')) {
         chatState.step='submitted';
-        addChatMsg('<i>⏳ Submitting your complaint...</i>','bot');
-        setTimeout(()=>submitChatComplaint(),800);
-      } else if(tl==='no'||tl.startsWith('no')||tl.includes('restart')){
-        addChatMsg('OK, let\'s start over.','bot');
-        setTimeout(()=>{ initChat(); },400);
+        addChatMsg(t('submitting'),'bot');
+        setTimeout(submitChatComplaint,900);
+      } else if(tl.startsWith('no')||tl.startsWith('नाही')||tl.startsWith('नहीं')||tl.includes('restart')) {
+        setTimeout(initChat,400);
       } else {
-        addChatMsg('Please type <b>YES</b> to confirm or <b>NO</b> to restart.','bot',['✅ YES - Submit','❌ NO - Restart']);
+        addChatMsg('⚠️','bot',t('confirm_btns'));
       }
       break;
 
     case 'ask_track':
-      chatState.trackQuery=t; chatState.step='menu';
+      chatState.step='menu';
       setTimeout(()=>{
-        if(t.toLowerCase().startsWith('lk-')||/^\d{10}$/.test(t)){
-          addChatMsg('📋 <b>Complaint Found!</b>\n\n🆔 ID: LK-2024-047\n👤 Name: Ramesh Kale\n🏛 Dept: 💧 Water Supply\n🔍 Issue: Irregular water supply\n📊 Status: <b>🟡 In Progress</b>\n\n🔔 <b>Latest Update:</b>\nWater dept team visited 15 Jun. Pipe repair scheduled 18 Jun.\n\n📞 Urgent help: 1800-XXX-XXXX','bot',['📝 File New Complaint','🏠 Main Menu']);
-        } else {
-          addChatMsg('❌ No complaint found for "<b>'+t+'</b>".\n\nCheck your Complaint ID or mobile number.\n📞 Call: 1800-XXX-XXXX','bot',['🔍 Try Again','📝 File Complaint','🏠 Main Menu']);
-          chatState.step='menu';
-        }
-      },1000);
+        if(tx.toLowerCase().startsWith('lk-')||/^\d{10}$/.test(tx))
+          addChatMsg(t('track_found'),'bot',[t('menu_btns')[0],t('back_btn')]);
+        else
+          addChatMsg(t('track_not'),'bot',[t('back_btn')]);
+      },900);
       break;
 
     case 'submitted':
-      addChatMsg('Your complaint was already submitted! Type <b>menu</b> to go back.','bot',['🏠 Main Menu']); break;
-
+      addChatMsg(t('back_btn'),'bot',[t('back_btn')]); break;
     default: showMenu();
   }
 }
 
 function askPriority() {
   chatState.step='ask_priority';
-  addChatMsg(
-    '✅ Problem: <b>'+chatState.subCategory+'</b>\n\n⚠️ What is the <b>priority</b>?\n(प्राथमिकता)\n\n1️⃣ 🟢 Low — can wait\n2️⃣ 🟡 Medium — needs attention soon\n3️⃣ 🔴 High / Urgent — immediate action!',
-    'bot', ['1 - Low','2 - Medium','3 - High/Urgent']
-  );
-}
-
-function showConfirmation() {
-  addChatMsg(
-    '✅ <b>Please confirm your details:</b>\n\n👤 Name: <b>'+chatState.name+'</b>\n📱 Mobile: <b>'+chatState.mobile+'</b>\n📍 Village: <b>'+chatState.village+'</b>\n🏛 Dept: <b>'+chatState.categoryLabel+'</b>\n🔍 Problem: <b>'+chatState.subCategory+'</b>\n⚠️ Priority: <b>'+chatState.priority+'</b>\n📝 Details: '+chatState.description+(chatState.photo?'\n📸 Photo: <b>'+chatState.photoName+'</b> attached':'')+'\n\nType <b>YES</b> to submit or <b>NO</b> to restart.',
-    'bot', ['✅ YES - Submit','❌ NO - Restart']
-  );
+  addChatMsg(t('ask_pri',chatState.subCategory),'bot',t('pri_btns'));
 }
 
 function submitChatComplaint() {
-  const counter = 52 + Math.floor(Math.random()*50);
-  const refId = 'LK-'+new Date().getFullYear()+'-'+String(counter).padStart(3,'0');
-  addChatMsg(
-    '🎉 <b>तक्रार यशस्वीपणे नोंदवली गेली!</b>\nComplaint submitted successfully!\n\n📋 <b>Complaint ID: '+refId+'</b>\n\n🔔 We will contact <b>'+chatState.name+'</b> on WhatsApp within <b>7 working days</b>.\n\nTo check status later:\n<b>TRACK '+refId+'</b>',
-    'bot', ['🔍 Track This Complaint','📝 New Complaint','🏠 Main Menu']
-  );
+  const id='LK-'+new Date().getFullYear()+'-'+String(52+Math.floor(Math.random()*50)).padStart(3,'0');
+  addChatMsg(t('success',chatState.name,id),'bot',[t('menu_btns')[0],t('back_btn')]);
+  removeImg();
   if(SCRIPT_URL!=='YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'){
     const fd=new FormData();
-    fd.append('action','submit'); fd.append('refId',refId);
-    fd.append('name',chatState.name); fd.append('mobile',chatState.mobile);
-    fd.append('village',chatState.village); fd.append('category',chatState.categoryLabel);
-    fd.append('sub_category',chatState.subCategory); fd.append('priority',chatState.priority);
-    fd.append('description',chatState.description); fd.append('contact_pref','whatsapp');
-    fd.append('status','Open'); fd.append('has_photo', chatState.photo?'Yes':'No');
+    ['action:submit','refId:'+id,'name:'+chatState.name,'mobile:'+chatState.mobile,
+     'village:'+chatState.village,'category:'+chatState.categoryLabel,
+     'sub_category:'+chatState.subCategory,'priority:'+chatState.priority,
+     'description:'+chatState.description,'status:Open'].forEach(p=>{
+      const [k,v]=p.split(':'); fd.append(k,v);
+    });
     fetch(SCRIPT_URL,{method:'POST',body:fd}).catch(()=>{});
   }
-  removeImg();
 }
 
 function userReply(text) {
   addChatMsg(text,'user');
-  setTimeout(()=>processInput(text,false),500);
+  setTimeout(()=>processInput(text,false),450);
 }
 
 function sendChat() {
   const inp=document.getElementById('chatInput');
-  const t=inp.value.trim();
-  const hasPhoto = pendingPhoto!==null;
-  if(!t && !hasPhoto) return;
-  if(hasPhoto) sendPhotoMsg(pendingPhoto);
-  if(t) addChatMsg(t,'user');
-  const msg = t || '📎 Photo attached';
-  inp.value='';
-  removeImg();
-  setTimeout(()=>processInput(msg, hasPhoto),500);
+  const tx=inp.value.trim();
+  const hasPhoto=pendingPhoto!==null;
+  if(!tx&&!hasPhoto)return;
+  if(hasPhoto)sendPhotoMsg(pendingPhoto);
+  if(tx)addChatMsg(tx,'user');
+  inp.value=''; removeImg();
+  setTimeout(()=>processInput(tx||'📎',hasPhoto),450);
 }
 
 function addChatMsg(text, type, qrs=[]) {
